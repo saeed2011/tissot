@@ -626,7 +626,11 @@ static ssize_t store_##file_name					\
 (struct cpufreq_policy *policy, const char *buf, size_t count)		\
 {									\
 	int ret;							\
-	struct cpufreq_policy new_policy;				\
+	struct cpufreq_policy new_policy;                               \
+                                             				\
+	if (&policy->object == &policy->min)				\
+		return count;						\
+									\
 									\
 	ret = cpufreq_get_policy(&new_policy, policy->cpu);		\
 	if (ret)							\
