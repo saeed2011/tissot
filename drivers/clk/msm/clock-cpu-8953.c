@@ -134,7 +134,7 @@ static struct pll_clk apcs_hf_pll = {
 	},
 	.base = &virt_bases[APCS_C0_PLL_BASE],
 #ifdef CONFIG_OC
-	.max_rate = 2803000000UL,
+	.max_rate = 2803200000UL,
 	.min_rate = 373028000UL,
 #else
 	.max_rate = 2208000000UL,
@@ -147,7 +147,7 @@ static struct pll_clk apcs_hf_pll = {
 		.ops = &clk_ops_variable_rate,
 		/* MX level of MSM is much higher than of PLL */
 #ifdef CONFIG_OC
-		VDD_MX_HF_FMAX_MAP1(SVS, 2803000000UL),
+		VDD_MX_HF_FMAX_MAP1(SVS, 2803200000UL),
 #else
 		VDD_MX_HF_FMAX_MAP1(SVS, 2400000000UL),
 #endif
