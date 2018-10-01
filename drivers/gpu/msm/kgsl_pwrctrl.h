@@ -24,11 +24,17 @@
 #define KGSL_PWRLEVEL_TURBO 0
 
 #define KGSL_PWR_ON	0xFFFF
-
+#ifdef CONFIG_OC
+#define KGSL_MAX_CLKS 17
+#else
 #define KGSL_MAX_CLKS 13
+#endif
 #define KGSL_MAX_REGULATORS 2
-
+#ifdef CONFIG_OC
+#define KGSL_MAX_PWRLEVELS 20
+#else
 #define KGSL_MAX_PWRLEVELS 10
+#endif
 
 /* Only two supported levels, min & max */
 #define KGSL_CONSTRAINT_PWR_MAXLEVELS 2
