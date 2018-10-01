@@ -1,5 +1,7 @@
 /*
  * Copyright (c) 2015-2016, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2018, Modiffed by AlekDev-divitarov@gmail.com 
+ * Copyright (c) 2018, Modiffed by Cheewaca-cheewaca@gmail.com
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -131,15 +133,24 @@ static struct pll_clk apcs_hf_pll = {
 		.test_ctl_lo_val = 0x1C000000,
 	},
 	.base = &virt_bases[APCS_C0_PLL_BASE],
+#ifdef CONFIG_OC
+	.max_rate = 2803000000UL,
+	.min_rate = 373028000UL,
+#else
 	.max_rate = 2208000000UL,
 	.min_rate = 652800000UL,
+#endif
 	.src_rate =  19200000UL,
 	.c = {
 		.parent = &xo_a_clk.c,
 		.dbg_name = "apcs_hf_pll",
 		.ops = &clk_ops_variable_rate,
 		/* MX level of MSM is much higher than of PLL */
+#ifdef CONFIG_OC
+		VDD_MX_HF_FMAX_MAP1(SVS, 2803000000UL),
+#else
 		VDD_MX_HF_FMAX_MAP1(SVS, 2400000000UL),
+#endif
 		CLK_INIT(apcs_hf_pll.c),
 	},
 };
@@ -156,6 +167,9 @@ static struct mux_div_clk a53ssmux_perf = {
 	},
 	.c = {
 		.dbg_name = "a53ssmux_perf",
+#ifdef CONFIG_OC
+                .flags = CLKFLAG_NO_RATE_CACHE,
+#endif
 		.ops = &clk_ops_mux_div_clk,
 		CLK_INIT(a53ssmux_perf.c),
 	},
@@ -177,6 +191,9 @@ static struct mux_div_clk a53ssmux_pwr = {
 	},
 	.c = {
 		.dbg_name = "a53ssmux_pwr",
+#ifdef CONFIG_OC
+                .flags = CLKFLAG_NO_RATE_CACHE,
+#endif
 		.ops = &clk_ops_mux_div_clk,
 		CLK_INIT(a53ssmux_pwr.c),
 	},
