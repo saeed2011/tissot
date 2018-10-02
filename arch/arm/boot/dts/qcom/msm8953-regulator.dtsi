@@ -160,7 +160,7 @@
 			regulator-min-microvolt = <1200000>;
 #endif
 			regulator-max-microvolt = <1225000>;
-#ifdef CONFIG_OC
+#ifdev CONFIG_OC
 			qcom,init-voltage = <1000000>;
 #else
 			qcom,init-voltage = <1200000>;
@@ -458,9 +458,9 @@ else
 					/* Speed bin 7 */
 					<9 9 9 9 9 9 9 9>;
 #endif
-#ifdef CONFIG_OC
 				qcom,cpr-corner-fmax-map =
-				<1 2 4 15>;
+#Ifdev CONFIG_OC
+				        <1 2 4 15>;
 #else
 					/* Speed bin 0 */
 					<1 2 4 9>,
@@ -482,7 +482,6 @@ else
 					/* Speed bin 7 */
 					<1 2 4 9>;
 #endif
-
 
 				qcom,cpr-voltage-ceiling =
 #ifdef CONFIG_OC
@@ -673,7 +672,7 @@ else
 					<1 1 2 2 2 2 2 2 2>;
 #endif
 				qcom,corner-frequencies =
-#ifdef CONFIG_OC
+#Ifdef CONFIG_OC
 					< 373028 >,
 					< 652800 >,
 					< 825600 >,
