@@ -124,7 +124,7 @@
 #endif
 		qcom,msm-bus,num-paths = <1>;
 		qcom,msm-bus,vectors-KBps =
-#ifdev CONFIG_OC
+#ifdef CONFIG_OC
 			<26 512 0 0>,
 			<26 512 0 400000>,     /*  1 bus=100  */
 			<26 512 0 800000>,     /*  2 bus=200  */

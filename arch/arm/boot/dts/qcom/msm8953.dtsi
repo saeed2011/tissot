@@ -1174,7 +1174,7 @@
 #endif
 	msm_cpufreq: qcom,msm-cpufreq {
 		compatible = "qcom,msm-cpufreq";
-#Ifdef CONFIG_OC
+#ifdef CONFIG_OC
 		clock-names = 
 				"l2_clk", "cpu0_clk", "cpu1_clk", "cpu2_clk",
 				"cpu3_clk", "cpu4_clk", "cpu5_clk", "cpu6_clk", 
@@ -1186,7 +1186,7 @@
 				"cpu3_clk", "cpu4_clk", "cpu5_clk",
 				"cpu6_clk", "cpu7_clk";
 #endif
-#Ifdef CONFIG_OC
+#ifdef CONFIG_OC
 		clocks = <&clock_cpu clk_cci_clk>,
 			 <&clock_cpu clk_a53_pwr_clk>,
 			 <&clock_cpu clk_a53_pwr_clk>,
@@ -1249,7 +1249,7 @@
 		qcom,src-dst-ports = <1 512>;
 		qcom,active-only;
 		qcom,bw-tbl =
-#Ifdef CONFIG_OC
+#ifdef CONFIG_OC
 			<  1525 /* 200 MHz */ >,       /*Low SVS*/
 			<  2288 /* 300 MHz */ >,
 			<  3509 /* 460 MHz */ >,       /* SVS   */
