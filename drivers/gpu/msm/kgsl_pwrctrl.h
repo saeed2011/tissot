@@ -1,6 +1,4 @@
 /* Copyright (c) 2010-2017, The Linux Foundation. All rights reserved.
- * Copyright (c) 2018, Modiffed by AlekDev-divitarov@gmail.com. 
- * Copyright (c) 2018, Modiffed by Cheewaca-cheewaca@gmail.com.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -26,19 +24,11 @@
 #define KGSL_PWRLEVEL_TURBO 0
 
 #define KGSL_PWR_ON	0xFFFF
-#ifdef CONFIG_OC
-#define KGSL_MAX_CLKS 17
-#endif
-#ifdef CONFING_NON_OC
+
 #define KGSL_MAX_CLKS 13
-#endif
 #define KGSL_MAX_REGULATORS 2
-#ifdef CONFIG_OC
-#define KGSL_MAX_PWRLEVELS 20
-#endif
-#ifdef CONFING_NON_OC
+
 #define KGSL_MAX_PWRLEVELS 10
-#endif
 
 /* Only two supported levels, min & max */
 #define KGSL_CONSTRAINT_PWR_MAXLEVELS 2

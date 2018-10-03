@@ -1,7 +1,5 @@
 /*
  * Copyright (c) 2015-2018, The Linux Foundation. All rights reserved.
- * Copyright (c) 2018, Modiffed by AlekDev-divitarov@gmail.com 
- * Copyright (c) 2018, Modiffed by Cheewaca-cheewaca@gmail.com
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -167,12 +165,7 @@ static struct alpha_pll_clk gpll3_clk_src = {
 	.slew = true,
 	.config_ctl_val = 0x4001055b,
 	.c = {
-#ifdef CONFIG_OC
-		.rate = 1540000000,
-#endif
-#ifdef CONFING_NON_OC
 		.rate = 1300000000,
-#endif
 		.parent = &xo_clk_src.c,
 		.dbg_name = "gpll3_clk_src",
 		.ops = &clk_ops_dyna_alpha_pll,
@@ -377,30 +370,7 @@ static struct rcg_clk vfe0_clk_src = {
 		CLK_INIT(vfe0_clk_src.c),
 	},
 };
-#ifdef CONFIG_OC
-static struct clk_freq_tbl ftbl_gfx3d_clk_src[] = {
-	F_MM(  19200000, FIXED_CLK_SRC,                  xo,    1,    0,     0),
-	F_MM(  50000000, FIXED_CLK_SRC,  gpll0_main_div2_mm,    8,    0,     0),
-	F_MM(  80000000, FIXED_CLK_SRC,  gpll0_main_div2_mm,    5,    0,     0),
-	F_MM( 100000000, FIXED_CLK_SRC,  gpll0_main_div2_mm,    4,    0,     0),
-	F_MM( 133330000, FIXED_CLK_SRC,  gpll0_main_div2_mm,    3,    0,     0),
-	F_MM( 160000000, FIXED_CLK_SRC,  gpll0_main_div2_mm,  2.5,    0,     0),
-	F_MM( 200000000, FIXED_CLK_SRC,  gpll0_main_div2_mm,    2,    0,     0),
-	F_MM( 216000000, FIXED_CLK_SRC, gpll6_main_div2_gfx,  2.5,    0,     0),
-	F_MM( 266670000, FIXED_CLK_SRC,               gpll0,    3,    0,     0),
-	F_MM( 320000000, FIXED_CLK_SRC,               gpll0,  2.5,    0,     0),
-	F_MM( 400000000, FIXED_CLK_SRC,               gpll0,    2,    0,     0),
-	F_MM( 485000000, FIXED_CLK_SRC,       gpll4_out_aux,  2.5,    0,     0),
-	F_MM( 650000000,    1240000000,               gpll3,    1,    0,     0),
-	F_MM( 800000000,    1360000000,               gpll3,    1,    0,     0),
-	F_MM( 900000000,    1470000000,               gpll3,    1,    0,     0),
-	F_MM( 950000000,    1480000000,               gpll3,    1,    0,     0),
-	F_MM( 1100000000,   1560000000,               gpll3,    1,    0,     0),
 
-	F_END
-};
-#endif
-#ifdef CONFING_NON_OC
 static struct clk_freq_tbl ftbl_gfx3d_clk_src[] = {
 	F_MM(  19200000, FIXED_CLK_SRC,                  xo,    1,    0,     0),
 	F_MM(  50000000, FIXED_CLK_SRC,  gpll0_main_div2_mm,    8,    0,     0),
@@ -420,8 +390,6 @@ static struct clk_freq_tbl ftbl_gfx3d_clk_src[] = {
 
 	F_END
 };
-#endif
-
 
 static struct clk_freq_tbl ftbl_gfx3d_clk_src_sdm450[] = {
 	F_MM(  19200000, FIXED_CLK_SRC,                  xo,    1,    0,     0),
@@ -1278,6 +1246,7 @@ static struct rcg_clk mclk2_clk_src = {
 };
 
 static struct clk_freq_tbl ftbl_mclk3_clk_src[] = {
+	F(  12000000, gpll6_main_div2,    1,    2,    90),
 	F(  24000000, gpll6_main_div2,    1,    2,    45),
 	F(  33330000, gpll0_main_div2,   12,    0,     0),
 	F(  36610000, gpll6,		  1,    2,    59),
