@@ -1,6 +1,4 @@
-/* Copyright (c) 2018, The Linux Foundation. All rights reserved.
- * Copyright (c) 2018, Modiffed by AlekDev-divitarov@gmail.com. 
- * Copyright (c) 2018, Modiffed by Cheewaca-cheewaca@gmail.com.
+/* Copyright (c) 2015-2016, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -41,25 +39,10 @@
 		/*
 		 * active-only flag is used while registering the bus
 		 * governor.It helps release the bus vote when the CPU
-		 * subsystem is inactive
+		 * subsystem is inactiv3
 		 */
 		qcom,active-only;
 		qcom,bw-tbl =
-#ifdef CONFIG_OC
-			<     0 /*  off     */ >,
-			<   381 /*  100  MHz */ >,
-			<   762 /*  200  MHz */ >,
-			<  1144 /*  300  MHz */ >,
-			<  1720 /*  451  MHz */ >,
-			<  2086 /*  547  MHz */ >,
-			<  2597 /*  681  MHz */ >,
-			<  3147 /*  825  MHz */ >,
-			<  3879 /*  1017 MHz */ >,
-			<  5161 /*  1353 MHz */ >,
-			<  5931 /*  1555 MHz */ >,
-			<  6881 /*  1804 MHz */ >;
-#endif
-#ifdef CONFING_NON_OC
 			< 0    >, /*  off */
 			< 1611 >, /* 1. DDR:211.20 MHz BIMC: 105.60 MHz */
 			< 2124 >, /* 2. DDR:278.40 MHz BIMC: 139.20 MHz */
@@ -71,7 +54,6 @@
 			< 6152 >, /* 8. DDR:806.40 MHz BIMC: 403.20 MHz */
 			< 6445 >, /* 9. DDR:844.80 MHz BIMC: 422.40 MHz */
 			< 7104 >; /*10. DDR:931.20 MHz BIMC: 465.60 MHz */
-#endif
 	};
 
 	msm_gpu: qcom,kgsl-3d0@1c00000 {
@@ -84,17 +66,11 @@
 		interrupt-names = "kgsl_3d0_irq";
 		qcom,id = <0>;
 		qcom,chipid = <0x05000600>;
-#ifdef CONFIG_OC
-		qcom,initial-pwrlevel = <6>;
-		qcom,idle-timeout = <34>;
-		qcom,deep-nap-timeout = <20>; 
-#endif
-#ifdef CONFING_NON_OC
+
 		qcom,initial-pwrlevel = <4>;
+
 		qcom,idle-timeout = <80>; //msecs
 		qcom,deep-nap-timeout = <100>; //msecs
-#endif
-
 		qcom,strtstp-sleepwake;
 
 		qcom,highest-bank-bit = <14>;
@@ -115,37 +91,10 @@
 		/* Bus Scale Settings */
 		qcom,gpubw-dev = <&gpubw>;
 		qcom,bus-control;
-#ifdef CONFIG_OC
-		qcom,bus-width = <32>;
-#endif
-#ifdef CONFING_NON_OC
 		qcom,bus-width = <16>;
-#endif
 		qcom,msm-bus,name = "grp3d";
-#ifdef CONFIG_OC
-		qcom,msm-bus,num-cases = <12>;
-#endif
-#ifdef CONFING_NON_OC
 		qcom,msm-bus,num-cases = <11>;
-#endif
 		qcom,msm-bus,num-paths = <1>;
-#ifdef CONFIG_OC
-		qcom,msm-bus,vectors-KBps =
-			<26 512 0 0>,
-			<26 512 0 400000>,     /*  1 bus=100  */
-			<26 512 0 800000>,     /*  2 bus=200  */
-			<26 512 0 1200000>,    /*  3 bus=300  */
-			<26 512 0 1804000>,    /*  4 bus=451  */
-			<26 512 0 2188000>,    /*  5 bus=547  */
-			<26 512 0 2724000>,    /*  6 bus=681  */
-			<26 512 0 3300000>,    /*  7 bus=825  */
-			<26 512 0 4068000>,    /*  8 bus=1017 */
-			<26 512 0 5412000>,    /*  9 bus=1353 */
-			<26 512 0 6220000>,    /* 10 bus=1555 */
-			<26 512 0 7216000>;    /* 11 bus=1804 */
-#endif
-
-#ifdef CONFING_NON_OC
 		qcom,msm-bus,vectors-KBps =
 				<26 512 0 0>,	     /*  off          */
 				<26 512 0 1689600>, /* 1. 211.20 MHz */
@@ -158,7 +107,7 @@
 				<26 512 0 6451200>, /* 8. 806.40 MHz */
 				<26 512 0 6758400>, /* 9. 844.80 MHz */
 				<26 512 0 7449600>; /*10. 931.20 MHz */
-#endif
+
 		/* GDSC regulator names */
 		regulator-names = "vddcx", "vdd";
 		/* GDSC oxili regulators */
@@ -189,13 +138,7 @@
 		qcom,ca-busy-penalty = <12000>;
 
 		/* Context aware jump target power level */
-#ifdef CONFIG_OC
-		qcom,ca-target-pwrlevel = <1>;
-		#cooling-cells = <2>;
-#endif
-#ifdef CONFING_NON_OC
 		qcom,ca-target-pwrlevel = <3>;
-#endif
 
 		/* GPU Mempools */
 		qcom,gpu-mempools {
@@ -224,87 +167,6 @@
 
 			compatible = "qcom,gpu-pwrlevels";
 
-#ifdef CONFIG_OC
-		/* TURBO LD0 */
-		qcom,gpu-pwrlevel@0 {
-			reg = <0>;
-			qcom,gpu-freq = <1100000000>;
-			qcom,bus-freq = <11>;
-			qcom,bus-min = <10>;
-			qcom,bus-max = <11>;
-		};
-
-		/* TURBO */
-		qcom,gpu-pwrlevel@1 {
-			reg = <1>;
-			qcom,gpu-freq = <950000000>;
-			qcom,bus-freq = <11>;
-			qcom,bus-min = <9>;
-			qcom,bus-max = <11>;
-		};
-
-		/* NOM+ */
-		qcom,gpu-pwrlevel@2 {
-			reg = <2>;
-			qcom,gpu-freq = <800000000>;
-			qcom,bus-freq = <10>;
-			qcom,bus-min = <8>;
-			qcom,bus-max = <11>;
-		};
-
-		/* NOM */
-		qcom,gpu-pwrlevel@3 {
-			reg = <3>;
-			qcom,gpu-freq = <650000000>;
-			qcom,bus-freq = <9>;
-			qcom,bus-min = <8>;
-			qcom,bus-max = <10>;
-		};
-
-		/* SVS+ */
-		qcom,gpu-pwrlevel@4 {
-			reg = <4>;
-			qcom,gpu-freq = <485000000>;
-			qcom,bus-freq = <8>;
-			qcom,bus-min = <7>;
-			qcom,bus-max = <10>;
-		};
-
-		/* SVS */
-		qcom,gpu-pwrlevel@5 {
-			reg = <5>;
-			qcom,gpu-freq = <320000000>;
-			qcom,bus-freq = <7>;
-			qcom,bus-min = <5>;
-			qcom,bus-max = <8>;
-		};
-
-		/* Low SVS */
-		qcom,gpu-pwrlevel@6 {
-			reg = <6>;
-			qcom,gpu-freq = <216000000>;
-			qcom,bus-freq = <6>;
-			qcom,bus-min = <4>;
-			qcom,bus-max = <7>;
-		};
-
-		qcom,gpu-pwrlevel@7 {
-			reg = <7>;
-			qcom,gpu-freq = <133300000>;
-			qcom,bus-freq = <4>;
-			qcom,bus-min = <3>;
-			qcom,bus-max = <4>;
-		};
-
-		/* XO */
-		qcom,gpu-pwrlevel@8 {
-			reg = <8>;
-			qcom,gpu-freq = <19200000>;
-			qcom,bus-freq = <0>;
-			qcom,bus-min = <0>;
-			qcom,bus-max = <0>;
-#endif
-
 			/* TURBO */
 			qcom,gpu-pwrlevel@0 {
 				reg = <0>;
@@ -313,7 +175,7 @@
 				qcom,bus-min = <10>;
 				qcom,bus-max = <10>;
 			};
-#ifdef CONFING_NON_OC
+
 			/* NOM+ */
 			qcom,gpu-pwrlevel@1 {
 				reg = <1>;
@@ -374,7 +236,6 @@
 				qcom,bus-freq = <0>;
 				qcom,bus-min = <0>;
 				qcom,bus-max = <0>;
-#endif
 			};
 		};
 	};
