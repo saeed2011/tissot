@@ -1,6 +1,5 @@
-/* Copyright (c) 2018, The Linux Foundation. All rights reserved.
- * Copyright (c) 2018, Modiffed by AlekDev-divitarov@gmail.com 
- * Copyright (c) 2018, Modiffed by Cheewaca-cheewaca@gmail.com
+/*
+ * Copyright (c) 2015-2016, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -18,19 +17,14 @@
 	rpm-regulator-smpa1 {
 		status = "okay";
 		pm8953_s1: regulator-s1 {
-#ifdef CONFIG_OC
-			regulator-min-microvolt = <795000>;
-			regulator-max-microvolt = <1081000>;
-#endif
-#ifdef CONFING_NON_OC
 			regulator-min-microvolt = <870000>;
 			regulator-max-microvolt = <1156000>;
-#endif
 			qcom,init-voltage = <1000000>;
 			status = "okay";
 		};
 	};
 
+	/* PM8953 S2 - VDD_CX supply */
 	rpm-regulator-smpa2 {
 		status = "okay";
 		pm8953_s2_level: regulator-s2-level {
@@ -43,7 +37,6 @@
 					<RPM_SMD_REGULATOR_LEVEL_TURBO>;
 			qcom,use-voltage-level;
 		};
-
 
 		pm8953_s2_floor_level: regulator-s2-floor-level {
 			compatible = "qcom,rpm-smd-regulator";
@@ -67,15 +60,6 @@
 					<RPM_SMD_REGULATOR_LEVEL_TURBO>;
 			qcom,use-voltage-level;
 		};
-#ifdef CONFIG_OC
-		cx_cdev: regulator-cx-cdev {
-			compatible = "qcom,regulator-cooling-device";
-			regulator-cdev-supply = <&pm8953_s2_floor_level>;
-			regulator-levels = <RPM_SMD_REGULATOR_LEVEL_NOM
-					RPM_SMD_REGULATOR_LEVEL_RETENTION>;
-			#cooling-cells = <2>;
-		};
-#endif
 	};
 
 	rpm-regulator-smpa3 {
@@ -98,6 +82,7 @@
 		};
 	};
 
+	/* VDD_MX supply */
 	rpm-regulator-smpa7 {
 		status = "okay";
 		pm8953_s7_level: regulator-s7-level {
@@ -153,19 +138,9 @@
 	rpm-regulator-ldoa2 {
 		status = "okay";
 		pm8953_l2: regulator-l2 {
-#ifdef CONFIG_OC
-			regulator-min-microvolt = <975000>;
-#endif
-#ifdef CONFING_NON_OC
 			regulator-min-microvolt = <1200000>;
-#endif
 			regulator-max-microvolt = <1225000>;
-#ifdef CONFIG_OC
-			qcom,init-voltage = <1000000>;
-#endif
-#ifdef CONFING_NON_OC
 			qcom,init-voltage = <1200000>;
-#endif
 			status = "okay";
 		};
 	};
@@ -332,6 +307,7 @@
 
 &spmi_bus {
 	qcom,pm8953@1 {
+		/* PM8953 S5 + S6 = VDD_APC supply */
 		pm8953_s5: spm-regulator@2000 {
 			compatible = "qcom,spm-regulator";
 			reg = <0x2000 0x100>;
@@ -378,7 +354,7 @@
 		qcom,cpr-idle-cycles = <15>;
 		qcom,cpr-step-quot-init-min = <12>;
 		qcom,cpr-step-quot-init-max = <14>;
-		qcom,cpr-count-mode = <0>;		
+		qcom,cpr-count-mode = <0>;		/* All-at-once */
 		qcom,cpr-count-repeat = <14>;
 		qcom,cpr-down-error-step-limit = <1>;
 		qcom,cpr-up-error-step-limit = <1>;
@@ -405,6 +381,7 @@
 		qcom,cpr-temp-point-map = <250 650 850>;
 		qcom,cpr-initial-temp-band = <0>;
 
+		/* Turbo (corner 6) ceiling voltage */
 		qcom,cpr-aging-ref-voltage = <990000>;
 
 		thread@0 {
@@ -417,32 +394,14 @@
 			apc_vreg: regulator {
 				regulator-name = "apc_corner";
 				regulator-min-microvolt = <1>;
-#ifdef CONFIG_OC
-		                regulator-max-microvolt = <15>;
-#endif
-#ifdef CONFING_NON_OC
 				regulator-max-microvolt = <9>;
-#endif
 
 				qcom,cpr-fuse-corners = <4>;
 				qcom,cpr-fuse-combos = <64>;
 				qcom,cpr-speed-bins = <8>;
-
 				qcom,cpr-speed-bin-corners =
-#ifdef CONFIG_OC
-				<15 15 15 15 15 15 15 15>;
-#endif
-#ifdef CONFING_NON_OC
-				<9 0 7 0 0 0 7 9>;
-#endif
-#ifdef CONFIG_OC
+					<9 0 7 0 0 0 7 9>;
 				qcom,cpr-corners =
-
-				<15 15 15 15 15 15 15 15>;
-#endif
-#ifdef CONFING_NON_OC
-				qcom,cpr-corners =
-
 					/* Speed bin 0 */
 					<9 9 9 9 9 9 9 9>,
 
@@ -462,12 +421,7 @@
 
 					/* Speed bin 7 */
 					<9 9 9 9 9 9 9 9>;
-#endif
-#ifdef CONFIG_OC
-				qcom,cpr-corner-fmax-map =
-				        <1 2 4 15>;
-#endif
-#ifdef CONFING_NON_OC
+
 				qcom,cpr-corner-fmax-map =
 					/* Speed bin 0 */
 					<1 2 4 9>,
@@ -488,86 +442,41 @@
 
 					/* Speed bin 7 */
 					<1 2 4 9>;
-#endif
-#ifdef CONFIG_OC
+
 				qcom,cpr-voltage-ceiling =
+					/* Speed bin 0 */
+					<715000  790000 860000 865000 920000
+					 990000 1065000 1065000 1065000>,
 
-				<640000>, 
-				<640000>,
-				<685000>,
-				<710000>,
-				<735000>,
-				<785000>,
-				<836000>,
-				<854000>,
-				<872000>,
-				<890000>,
-				<908000>,
-				<926000>,
-				<944000>,
-				<962000>,
-				<990000>;
-#ifdef CONFING_NON_OC
-				qcom,cpr-voltage-ceiling =
-				/* Speed bin 0 */
-				<715000  790000 860000 865000 920000
-			         990000 1065000 1065000 1065000>,
+					/* Speed bin 2 */
+					<715000  790000 860000 865000 920000
+					 990000 1065000>,
 
-				/* Speed bin 2 */
-				<715000  790000 860000 865000 920000
-			         990000 1065000>,
+					/* Speed bin 6 */
+					<715000  790000 860000 865000 920000
+					 990000 1065000>,
 
-				/* Speed bin 6 */
-				<715000  790000 860000 865000 920000
-				 990000 1065000>,
+					/* Speed bin 7 */
+					<715000  790000 860000 865000 920000
+					 990000 1065000 1065000 1065000>;
 
-				/* Speed bin 7 */
-				<715000  790000 860000 865000 920000
-				 990000 1065000 1065000 1065000>;
-#endif
-#ifdef CONFIG_OC
 				qcom,cpr-voltage-floor =
-				<500000>,
-				<500000>,
-				<500000>,
-				<500000>,
-				<500000>,
-				<500000>,
-				<500000>,
-				<500000>,
-				<500000>,
-				<500000>,
-				<500000>,
-				<500000>,
-				<500000>,
-				<500000>,
-				<500000>;
-#endif
-#ifdef CONFING_NON_OC
-				qcom,cpr-voltage-floor =
+					/* Speed bin 0 */
+					<500000  500000 500000 500000 500000
+					 500000  500000 500000 500000>,
 
-			      /* Speed bin 0 */
-				<500000  500000 500000 500000 500000
-				 500000  500000 500000 500000>,
+					/* Speed bin 2 */
+					<500000  500000 500000 500000 500000
+					 500000  500000>,
 
-				/* Speed bin 2 */
-				<500000  500000 500000 500000 500000
-			         500000  500000>,
+					/* Speed bin 6 */
+					<500000  500000 500000 500000 500000
+					 500000  500000>,
 
-				/* Speed bin 6 */
-				<500000  500000 500000 500000 500000
-				 500000  500000>,
+					/* Speed bin 7 */
+					<500000  500000 500000 500000 500000
+					 500000  500000 500000 500000>;
 
-				/* Speed bin 7 */
-				<500000  500000 500000 500000 500000
-			         500000  500000 500000 500000>;
-#endif
-#ifdef CONFIG_OC
-				qcom,cpr-floor-to-ceiling-max-range =
-				         <50000 50000 50000 50000 50000 50000 50000 50000
-				          50000 50000 50000 50000 50000 50000 50000>;
-#endif
-#ifdef CONFING_NON_OC
 				qcom,cpr-floor-to-ceiling-max-range =
 					/* Speed bin 0; CPR rev 0..7 */
 					 <    0     0     0     0     0
@@ -640,7 +549,6 @@
 					  50000 50000 50000 50000>,
 					 <50000 50000 50000 50000 50000
 					  50000 50000 50000 50000>;
-#endif
 
 				qcom,cpr-misc-fuse-voltage-adjustment =
 					/* Speed bin 0; misc fuse 0..1 */
@@ -666,11 +574,7 @@
 					     0     0     0     0>,
 					<    0     0 30000     0      0
 					     0     0     0     0>;
-#ifdef CONFIG_OC
-				qcom,mem-acc-voltage =
-		                        <1 1 1 1 1 2 2 2 2 2 2 2 2 2 2>;
-#endif
-#ifdef CONFING_NON_OC
+
 				qcom,mem-acc-voltage =
 					/* Speed bin 0 */
 					<1 1 2 2 2 2 2 2 2>,
@@ -683,26 +587,7 @@
 
 					/* Speed bin 7 */
 					<1 1 2 2 2 2 2 2 2>;
-#endif
-#ifdef CONFIG_OC
-				qcom,corner-frequencies =
-					< 373028 >,
-					< 652800 >,
-					< 825000 >,
-					< 1056000 >,
-					< 1209000 >,
-					< 1363000 >,
-					< 1536000 >,
-					< 1689600 >,
-					< 1996000 >,
-					< 2169000 >,
-					< 2246000 >,
-					< 2400000 >,
-					< 2553000 >,
-					< 2649600 >,
-					< 2803000 >;
-#endif
-#ifdef CONFING_NON_OC
+
 				qcom,corner-frequencies =
 					/* Speed bin 0 */
 					<652800000 1036800000 1401600000
@@ -723,19 +608,7 @@
 					<652800000 1036800000 1401600000
 					1689600000 1804800000 1958400000
 					2016000000 2150400000 2208000000>;
-#endif
-#ifdef CONFIG_OC
-				qcom,cpr-open-loop-voltage-fuse-adjustment =
-		                       <     0      0      0     0>,
-				       < 25000      0   5000 40000>,
-				       < 25000      0   5000 40000>,
-				       < 25000      0   5000 40000>,
-				       <     0      0      0     0>,
-				       <     0      0      0     0>,
-				       <     0      0      0     0>,
-				       <     0      0      0     0>;
-#endif
-#ifdef CONFING_NON_OC
+
 				qcom,cpr-open-loop-voltage-fuse-adjustment =
 					/* Speed bin 0; CPR rev 0..7 */
 					<     0      0      0     0>,
@@ -816,19 +689,7 @@
 					<     0      0      0     0>,
 					<     0      0      0     0>,
 					<     0      0      0     0>;
-#endif
-#ifdef CONFIG_OC
-				qcom,cpr-closed-loop-voltage-fuse-adjustment =
-				<      0        0        0      0>,
-				<  10000 (-15000)        0  25000>,
-				<  10000 (-15000)        0  25000>,
-				<(-5000) (-30000) (-15000)  10000>,
-				<      0        0        0      0>,
-				<      0        0        0      0>,
-				<      0        0        0      0>,
-				<      0        0        0      0>;
-#endif
-#ifdef CONFING_NON_OC
+
 				qcom,cpr-closed-loop-voltage-fuse-adjustment =
 					/* Speed bin 0; CPR rev 0..7 */
 					<      0        0        0      0>,
@@ -909,45 +770,21 @@
 					<      0        0        0      0>,
 					<      0        0        0      0>,
 					<      0        0        0      0>;
-#endif
-#ifdef CONFIG_OC
+
 				qcom,cpr-ro-scaling-factor =
-				<3610 3790    0 2200 2450 2310 2170 2210
-				2330 2210 2470 2340  780 2700 2450 2090>,
-				<3610 3790    0 2200 2450 2310 2170 2210
-				2330 2210 2470 2340  780 2700 2450 2090>,
-				<3610 3790    0 2200 2450 2310 2170 2210
-				2330 2210 2470 2340  780 2700 2450 2090>,
-				<3610 3790    0 2200 2450 2310 2170 2210
-				2330 2210 2470 2340  780 2700 2450 2090>;
-#endif
-#ifdef CONFING_NON_OC
-				qcom,cpr-ro-scaling-factor =
-				<3610 3790    0 2200 2450 2310 2170 2210
-				2330 2210 2470 2340  780 2700 2450 2090>,
-			        <3610 3790    0 2200 2450 2310 2170 2210
-				2330 2210 2470 2340  780 2700 2450 2090>,
-			        <3610 3790    0 2200 2450 2310 2170 2210
-				2330 2210 2470 2340  780 2700 2450 2090>,
-				<3610 3790    0 2200 2450 2310 2170 2210
-				2330 2210 2470 2340  780 2700 2450 2090>;
-#endif
+				      <3610 3790    0 2200 2450 2310 2170 2210
+				       2330 2210 2470 2340  780 2700 2450 2090>,
+				      <3610 3790    0 2200 2450 2310 2170 2210
+				       2330 2210 2470 2340  780 2700 2450 2090>,
+				      <3610 3790    0 2200 2450 2310 2170 2210
+				       2330 2210 2470 2340  780 2700 2450 2090>,
+				      <3610 3790    0 2200 2450 2310 2170 2210
+				       2330 2210 2470 2340  780 2700 2450 2090>;
+
 				qcom,allow-voltage-interpolation;
 				qcom,allow-quotient-interpolation;
 				qcom,cpr-scaled-open-loop-voltage-as-ceiling;
 
-#ifdef CONFIG_OC
-				qcom,corner-allow-temp-adjustment =
-				<0 0 0 0 0 0 0 0 0 0 0 0 0 0 0>,
-				<0 0 0 0 0 0 0 0 0 0 0 0 0 0 0>,
-				<0 0 0 0 0 0 0 0 0 0 0 0 0 0 0>,
-				<1 1 1 1 1 0 0 0 0 0 0 0 0 0 0>,
-				<1 1 1 1 1 0 0 0 0 0 0 0 0 0 0>,
-				<1 1 1 1 1 0 0 0 0 0 0 0 0 0 0>,
-				<1 1 1 1 1 0 0 0 0 0 0 0 0 0 0>,
-				<1 1 1 1 1 0 0 0 0 0 0 0 0 0 0>;
-#endif
-#ifdef CONFING_NON_OC
 				qcom,corner-allow-temp-adjustment =
 					/* Speed bin 0; CPR rev 0..7 */
 					<0 0 0 0 0 0 0 0 0>,
@@ -988,28 +825,22 @@
 					<1 1 1 1 0 0 0 0 0>,
 					<1 1 1 1 0 0 0 0 0>,
 					<1 1 1 1 0 0 0 0 0>;
-#endif
 
 				qcom,cpr-corner1-temp-core-voltage-adjustment =
 					<(0) (-5000) (-15000) (-20000)>;
 
 				qcom,cpr-corner2-temp-core-voltage-adjustment =
-				<(0) (-5000) (-15000) (-15000)>;
+					<(0) (-5000) (-15000) (-15000)>;
 
 				qcom,cpr-corner3-temp-core-voltage-adjustment =
-				<(0) (-5000) (-15000)      (0)>;
+					<(0) (-5000) (-15000)      (0)>;
 
 				qcom,cpr-corner4-temp-core-voltage-adjustment =
-				<(0) (-5000) (-15000)      (0)>;
+					<(0) (-5000) (-15000)      (0)>;
 
 				qcom,cpr-aging-max-voltage-adjustment = <15000>;
-				qcom,cpr-aging-ref-corner = <6>;
+				qcom,cpr-aging-ref-corner = <6>; /* Turbo */
 				qcom,cpr-aging-ro-scaling-factor = <2800>;
-#ifdef CONFIG_OC
-				qcom,allow-aging-voltage-adjustment =
-				        <0 0 0 1 1 1 1 1>;
-#endif
-#ifdef CONFING_NON_OC
 				qcom,allow-aging-voltage-adjustment =
 					/* Speed bin 0 */
 					<0 0 0 1 1 1 1 1>,
@@ -1030,7 +861,6 @@
 
 					/* Speed bin 7 */
 					<0 0 0 1 1 1 1 1>;
-#endif
 			};
 		};
 	};
@@ -1057,20 +887,9 @@
 		regulator-min-microvolt = <1>;
 		regulator-max-microvolt = <7>;
 
-#ifdef CONFIG_OC
-		qcom,ldo-voltage-ceiling =
-		<620000>,
-		<680000>,
-		<750000>;
-		qcom,ldo-voltage-floor =
-		<510000>,
-		<510000>,
-		<600000>;
-#endif
-#ifdef CONFING_NON_OC
 		qcom,ldo-voltage-ceiling = <620000 680000 750000>;
 		qcom,ldo-voltage-floor =   <510000 510000 600000>;
-#endif
+
 		qcom,num-corners = <7>;
 		qcom,num-ldo-corners = <3>;
 		qcom,ldo-enable-corner-map = <1 1 1 0 0 0 0>;
