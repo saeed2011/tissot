@@ -1,4 +1,6 @@
 /* Copyright (c) 2015-2016, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2018, Modiffed by AlekDev-divitarov@gmail.com. 
+ * Copyright (c) 2018, Modiffed by Cheewaca-cheewaca@gmail.com.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -38,9 +40,38 @@
 		qcom,use-psci;
 		#address-cells = <1>;
 		#size-cells = <0>;
+#ifdef CONFIG_OC
+		clock-names = "l2_clk", "cpu0_clk", "cpu1_clk", "cpu2_clk",
+				"cpu3_clk", "cpu4_clk", "cpu5_clk",
+				"cpu6_clk", "cpu7_clk", "cpu8_clk",
+				"cpu9_clk", "cpu10_clk", "cpu11_clk",
+				"cpu12_clk", "cpu13_clk", "cpu14_clk",
+				"cpu15_clk";
+#endif
+#ifdef CONFING_NON_OC
 		clock-names = "l2_clk", "cpu0_clk", "cpu1_clk",
 				"cpu2_clk", "cpu3_clk", "cpu4_clk",
 				"cpu5_clk", "cpu6_clk", "cpu7_clk";
+#endif
+#ifdef CONFIG_OC
+		clocks = <&clock_cpu clk_cci_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>;
+#endif
+#ifdef CONFING_NON_OC
 		clocks = <&clock_cpu clk_cci_clk>,
 			 <&clock_cpu clk_a53_pwr_clk>,
 			 <&clock_cpu clk_a53_pwr_clk>,
@@ -50,7 +81,7 @@
 			 <&clock_cpu clk_a53_pwr_clk>,
 			 <&clock_cpu clk_a53_pwr_clk>,
 			 <&clock_cpu clk_a53_pwr_clk>;
-
+#endif
 		qcom,pm-cluster@0 {
 			reg = <0>;
 			#address-cells = <1>;
@@ -103,6 +134,7 @@
 				label = "pwr";
 				qcom,spm-device-names = "l2";
 				qcom,default-level=<0>;
+				qcom,use-prediction;
 				qcom,cpu = <&CPU0 &CPU1 &CPU2 &CPU3>;
 				qcom,psci-mode-shift = <4>;
 				qcom,psci-mode-mask = <0xf>;
@@ -197,6 +229,7 @@
 				qcom,spm-device-names = "l2";
 				qcom,default-level=<0>;
 				qcom,cpu = <&CPU4 &CPU5 &CPU6 &CPU7>;
+                                qcom,use-prediction;
 				qcom,psci-mode-shift = <4>;
 				qcom,psci-mode-mask = <0xf>;
 
