@@ -1,0 +1,51 @@
+Manifest-Version: 1.0
+Created-By: 1.0 (Android SignApk)
+
+Name: META-INF/com/google/android/updater-script
+SHA1-Digest: surH1Bs4hR30JclyYkFBB7d7164=
+
+Name: anykernel.sh
+SHA1-Digest: xjaF28qKDrBlKWRpDe/gN7rIQX8=
+
+Name: overlay/init.spectrum.sh
+SHA1-Digest: T/ydInLGsyfGx/R1/weUC/bYlAI=
+
+Name: META-INF/com/google/android/update-binary
+SHA1-Digest: G/+cGrq/9rQAuSl6i8127QA+IiM=
+
+Name: dtb-treble/msm8953-qrd-sku3-tissot.dtb
+SHA1-Digest: cqONxF88iGUorBc0cyy7m19Eymw=
+
+Name: dtb-nontreble/msm8953-qrd-sku3-tissot.dtb
+SHA1-Digest: NUFTAWHUFbwV1P2tWWmVrnkR2BU=
+
+Name: tools/busybox
+SHA1-Digest: iJ3B+9YUcU5tLtHIJo3JapajN9g=
+
+Name: banner
+SHA1-Digest: zzcofm5XikxaqboHPmYcNQp3Yuo=
+
+Name: tools/magiskpolicy
+SHA1-Digest: QvzK6bf/2UkRFv7qVjEtSn32Bjc=
+
+Name: tools/mkbootimg
+SHA1-Digest: TBUOJEBEmd4z0HASmwPi6jO3Hkc=
+
+Name: tools/unpackbootimg
+SHA1-Digest: 5Lz4+mShlPh/sn8Ey0UhGEU1Td4=
+
+Name: tools/ak2-core.sh
+SHA1-Digest: I460aCHz22AjL77uzmW+2b+NCWE=
+
+Name: tools/xz
+SHA1-Digest: WVzvPtyYdIkX/XvJwA4TKF6dSeE=
+
+Name: tools/lz4
+SHA1-Digest: tm4ejgZWfiAo6GKuOpaF0S2vH2k=
+
+Name: kernel/Image.gz
+SHA1-Digest: sAaT+7FMHOy3ohcLAdjE7rX83kI=
+
+Name: overlay/init.spectrum.rc
+SHA1-Digest: a8fSY44HsUJzd1tnNxDxX8q7sEQ=
+
