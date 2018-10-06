@@ -241,7 +241,7 @@ dtb-$(CONFIG_ARCH_MSM8940) += msm8940-pmi8937-cdp.dtb \
 ifeq ($(CONFIG_ARCH_MSM8953),y)
 dtb-$(CONFIG_ARCH_MSM8953) += msm8953-qrd-sku3-tissot-nontreble.dtb
 dtb-$(CONFIG_ARCH_MSM8953) += msm8953-qrd-sku3-tissot-treble.dtb
-endif
+else
 dtb-$(CONFIG_ARCH_MSM8953) += msm8953-sim.dtb \
 	msm8953-rumi.dtb \
 	msm8953-cdp.dtb \
