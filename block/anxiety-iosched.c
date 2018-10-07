@@ -1,6 +1,6 @@
 /*
- * Anxiety I/O scheduler
- * Copywrite (C) 2018 Draco (Tyler Nijmeh) <tylernij@gmail.com>
+ * Anxiety IO scheduler
+ * Copyright (C) 2018 Draco (Tyler Nijmeh) <tylernij@gmail.com>
  */
 #include <linux/blkdev.h>
 #include <linux/elevator.h>
@@ -9,101 +9,151 @@
 #include <linux/slab.h>
 #include <linux/init.h>
 
+/* default tunable values */
+static const uint8_t max_writes_starved = 32; /* max amount of times reads can starve pending writes */
+
 struct anxiety_data {
-	struct list_head queue;
+	struct list_head queue[2];
+	unsigned int writes_starved;
+
+	/* tunables */
+	unsigned int max_writes_starved;
 };
 
-static inline void anxiety_merged_requests(struct request_queue *q, struct request *rq, struct request *next) {
-	list_del_init(&next->queuelist);
+static void anxiety_merged_requests(struct request_queue *q, struct request *rq, struct request *next)
+{
+	rq_fifo_clear(next);
 }
 
-static struct request *anxiety_choose_request(struct anxiety_data *mdata, int data_dir) {
-	struct list_head *head;
-	list_for_each_prev(head, &mdata->queue) {
-		struct request *rq = (struct request *) head;
-		const int sync = rq_is_sync(rq);
-		const int read = rq_data_dir(rq);
-
-		//return rq_entry_fifo(async[data_dir].next);
+static __always_inline struct request *anxiety_choose_request(struct anxiety_data *mdata)
+{
+	/* prioritize reads unless writes are exceedingly starved */
+	if (mdata->writes_starved <= mdata->max_writes_starved && 
+			!list_empty(&mdata->queue[READ])) {
+		mdata->writes_starved++;
+		return rq_entry_fifo(mdata->queue[READ].next);
 	}
 
+	/* write */
+	if (!list_empty(&mdata->queue[WRITE])) {
+		mdata->writes_starved = 0;
+		return rq_entry_fifo(mdata->queue[WRITE].next);
+	}
+
+	/* all queues are empty; no pending requests */
+	mdata->writes_starved = 0;
 	return NULL;
 }
 
-static int anxiety_dispatch(struct request_queue *q, int force) {
-	struct anxiety_data *nd = q->elevator->elevator_data;
-	struct request *rq;
+static int anxiety_dispatch(struct request_queue *q, int force)
+{
+	struct request *rq = anxiety_choose_request(q->elevator->elevator_data);
 
-	rq = list_first_entry_or_null(&nd->queue, struct request, queuelist);
 	if (!rq)
 		return 0;
 
-	list_del_init(&rq->queuelist);
-	elv_dispatch_sort(q, rq);
+	rq_fifo_clear(rq);
+	elv_dispatch_add_tail(rq->q, rq);
+
 	return 1;
 }
 
-static inline void anxiety_add_request(struct request_queue *q, struct request *rq) {
-	list_add_tail(&rq->queuelist, &((struct anxiety_data *) q->elevator->elevator_data)->queue);
+static void anxiety_add_request(struct request_queue *q, struct request *rq)
+{
+	list_add_tail(&rq->queuelist, &((struct anxiety_data *) q->elevator->elevator_data)->queue[rq_data_dir(rq)]);
 }
 
-static inline struct request *anxiety_former_request(struct request_queue *q, struct request *rq) {
-	if (rq->queuelist.prev == &((struct anxiety_data *) q->elevator->elevator_data)->queue)
+static struct request *anxiety_former_request(struct request_queue *q, struct request *rq)
+{
+	if (rq->queuelist.prev == &((struct anxiety_data *) q->elevator->elevator_data)->queue[rq_data_dir(rq)])
 		return NULL;
+
 	return list_prev_entry(rq, queuelist);
 }
 
-static inline struct request *anxiety_latter_request(struct request_queue *q, struct request *rq) {
-	if (rq->queuelist.next == &((struct anxiety_data *) q->elevator->elevator_data)->queue)
+static struct request *anxiety_latter_request(struct request_queue *q, struct request *rq)
+{
+	if (rq->queuelist.next == &((struct anxiety_data *) q->elevator->elevator_data)->queue[rq_data_dir(rq)])
 		return NULL;
+
 	return list_next_entry(rq, queuelist);
 }
 
-static int anxiety_init_queue(struct request_queue *q, struct elevator_type *e) {
-	struct anxiety_data *nd;
-	struct elevator_queue *eq;
+static int anxiety_init_queue(struct request_queue *q, struct elevator_type *elv)
+{	
+	struct elevator_queue *eq = elevator_alloc(q, elv);
 
-	eq = elevator_alloc(q, e);
 	if (!eq)
 		return -ENOMEM;
 
-	nd = kmalloc_node(sizeof(*nd), GFP_KERNEL, q->node);
-	if (!nd) {
+	/* allocate data */
+	struct anxiety_data *data = kmalloc_node(sizeof(*data), GFP_KERNEL, q->node);
+	if (!data) {
 		kobject_put(&eq->kobj);
 		return -ENOMEM;
 	}
-	eq->elevator_data = nd;
+	eq->elevator_data = data;
 
-	INIT_LIST_HEAD(&nd->queue);
+	/* initialize data */
+	INIT_LIST_HEAD(&data->queue[READ]);
+	INIT_LIST_HEAD(&data->queue[WRITE]);
+	data->writes_starved = 0;
+	data->max_writes_starved = max_writes_starved;
+
+	/* set the elevator to us */
 	spin_lock_irq(q->queue_lock);
 	q->elevator = eq;
 	spin_unlock_irq(q->queue_lock);
+
 	return 0;
 }
 
-static void anxiety_exit_queue(struct elevator_queue *e) {
-	BUG_ON(!list_empty(&((struct anxiety_data *) e->elevator_data)->queue));
+/* sysfs tunables */
+static ssize_t anxiety_max_writes_starved_show(struct elevator_queue *e, char *page)
+{
+	struct anxiety_data *ad = e->elevator_data;
+
+	return snprintf(page, PAGE_SIZE, "%u\n", ad->max_writes_starved);
 }
+
+static ssize_t anxiety_max_writes_starved_store(struct elevator_queue *e, const char *page, size_t count)
+{
+	struct anxiety_data *ad = e->elevator_data;
+	int ret;
+
+	ret = kstrtouint(page, 0, &ad->max_writes_starved);
+	if (ret < 0)
+		return ret;
+
+	return count;
+}
+
+static struct elv_fs_entry anxiety_attrs[] = {
+	__ATTR(max_writes_starved, 0644, anxiety_max_writes_starved_show, anxiety_max_writes_starved_store),
+	__ATTR_NULL
+};
 
 static struct elevator_type elevator_anxiety = {
 	.ops = {
-		.elevator_merge_req_fn		= anxiety_merged_requests,
+		.elevator_merge_req_fn	= anxiety_merged_requests,
 		.elevator_dispatch_fn		= anxiety_dispatch,
 		.elevator_add_req_fn		= anxiety_add_request,
-		.elevator_former_req_fn		= anxiety_former_request,
-		.elevator_latter_req_fn		= anxiety_latter_request,
-		.elevator_init_fn		= anxiety_init_queue,
-		.elevator_exit_fn		= anxiety_exit_queue,
+		.elevator_former_req_fn	= anxiety_former_request,
+		.elevator_latter_req_fn	= anxiety_latter_request,
+		.elevator_init_fn				= anxiety_init_queue,
 	},
 	.elevator_name = "anxiety",
+	.elevator_attrs = anxiety_attrs,
 	.elevator_owner = THIS_MODULE,
 };
 
-static int __init anxiety_init(void) {
+static int __init anxiety_init(void)
+{
 	return elv_register(&elevator_anxiety);
 }
 
-static void __exit anxiety_exit(void) {
+static void __exit anxiety_exit(void)
+{
 	elv_unregister(&elevator_anxiety);
 }
 
