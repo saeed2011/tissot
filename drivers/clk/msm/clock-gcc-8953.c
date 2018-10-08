@@ -710,7 +710,7 @@ static struct rcg_clk apc1_droop_detector_clk_src = {
 };
 
 static struct clk_freq_tbl ftbl_blsp_i2c_apps_clk_src[] = {
-	F(  24000000,              xo,    1,    0,     0),
+	F(  19200000,              xo,    1,    0,     0),
 	F(  25000000, gpll0_main_div2,   16,    0,     0),
 	F(  60000000,           gpll0,   16,    0,     0),
 	F_END
@@ -1573,8 +1573,8 @@ static struct rcg_clk pdm2_clk_src = {
 };
 
 static struct clk_freq_tbl ftbl_rbcpr_gfx_clk_src[] = {
-	F(  24000000,             xo,    1,    0,     0),
-	F(  60000000,          gpll0,   16,    0,     0),
+	F(  19200000,             xo,    1,    0,     0),
+	F(  50000000,          gpll0,   16,    0,     0),
 	F_END
 };
 
@@ -1587,7 +1587,7 @@ static struct rcg_clk rbcpr_gfx_clk_src = {
 	.c = {
 		.dbg_name = "rbcpr_gfx_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 24000000, SVS, 60000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 19200000, SVS, 50000000),
 		CLK_INIT(rbcpr_gfx_clk_src.c),
 	},
 };
@@ -1671,7 +1671,7 @@ static struct rcg_clk sdcc2_apps_clk_src = {
 };
 
 static struct clk_freq_tbl ftbl_usb30_mock_utmi_clk_src[] = {
-	F(  24000000,                       xo,    1,    0,     0),
+	F(  19200000,                       xo,    1,    0,     0),
 	F(  60000000,     gpll6_main_div2_mock,    9,    1,     1),
 	F_END
 };
@@ -1685,7 +1685,7 @@ static struct rcg_clk usb30_mock_utmi_clk_src = {
 	.c = {
 		.dbg_name = "usb30_mock_utmi_clk_src",
 		.ops = &clk_ops_rcg_mnd,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 24000000, SVS, 60000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 19200000, SVS, 60000000),
 		CLK_INIT(usb30_mock_utmi_clk_src.c),
 	},
 };
