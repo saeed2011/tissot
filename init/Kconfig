@@ -379,9 +379,6 @@ config VIRT_CPU_ACCOUNTING_GEN
 
 	  If unsure, say N.
 
-
-
-
 config IRQ_TIME_ACCOUNTING
 	bool "Fine granularity task level IRQ time accounting"
 	depends on HAVE_IRQ_TIME_ACCOUNTING && !NO_HZ_FULL
@@ -1330,16 +1327,6 @@ config SCHED_TUNE
 	  boost value is applied to all (CFS) tasks in the system.
 
 	  If unsure, say N.
-
-config DYNAMIC_STUNE_BOOST
-	bool "Dynamic SchedTune boosting support"
-	depends on SCHED_TUNE
-	help
-	  This option extends the SchedTune framework and provides APIs to
-	  activate and reset SchedTune boosting from anywhere in the kernel.
-
-	  If unsure, say N.
-
 
 config SYSFS_DEPRECATED
 	bool "Enable deprecated sysfs features to support old userspace tools"
