@@ -397,3 +397,4 @@ free_b:
 	return ret;
 }
 late_initcall(cpu_input_boost_init);
+
