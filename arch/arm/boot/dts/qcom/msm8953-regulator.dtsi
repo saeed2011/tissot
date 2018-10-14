@@ -475,7 +475,7 @@
 					< 2611200 >,
 					< 2764800 >,
 					< 2918400 >,
-					< 3003000 >;
+					< 3072000 >;
 
 				qcom,cpr-open-loop-voltage-fuse-adjustment =
 				/* Speed bin 0; CPR rev 0..7 */
