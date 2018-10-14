@@ -173,7 +173,7 @@
 		/* MYeXtreme */
 		qcom,gpu-pwrlevel@0 {
 			reg = <0>;
-			qcom,gpu-freq = <1350000000>;
+			qcom,gpu-freq = <1250000000>;
 			qcom,bus-freq = <11>;
 			qcom,bus-min = <11>;
 			qcom,bus-max = <11>;
@@ -182,7 +182,7 @@
 		/* TURBO eXtreme */
 		qcom,gpu-pwrlevel@1 {
 			reg = <1>;
-			qcom,gpu-freq = <1200000000>;
+			qcom,gpu-freq = <1100000000>;
 			qcom,bus-freq = <11>;
 			qcom,bus-min = <10>;
 			qcom,bus-max = <11>;
@@ -191,7 +191,7 @@
 		/* TURBO */
 		qcom,gpu-pwrlevel@2 {
 			reg = <2>;
-			qcom,gpu-freq = <1050000000>;
+			qcom,gpu-freq = <950000000>;
 			qcom,bus-freq = <11>;
 			qcom,bus-min = <9>;
 			qcom,bus-max = <11>;
@@ -200,7 +200,7 @@
 		/* NOM+ */
 		qcom,gpu-pwrlevel@3 {
 			reg = <3>;
-			qcom,gpu-freq = <950000000>;
+			qcom,gpu-freq = <800000000>;
 			qcom,bus-freq = <10>;
 			qcom,bus-min = <8>;
 			qcom,bus-max = <11>;
@@ -209,7 +209,7 @@
 		/* NOM */
 		qcom,gpu-pwrlevel@4 {
 			reg = <4>;
-			qcom,gpu-freq = <800000000>;
+			qcom,gpu-freq = <650000000>;
 			qcom,bus-freq = <9>;
 			qcom,bus-min = <8>;
 			qcom,bus-max = <10>;
