@@ -76,7 +76,6 @@
 #include <linux/aio.h>
 #include <linux/compiler.h>
 #include <linux/kcov.h>
-#include <linux/devfreq_boost.h>
 
 #include <asm/pgtable.h>
 #include <asm/pgalloc.h>
