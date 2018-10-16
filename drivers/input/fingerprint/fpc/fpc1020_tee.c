@@ -40,7 +40,6 @@
 #include <linux/fb.h>
 #include <linux/mdss_io_util.h>
 #include <linux/state_notifier.h>
-#include <linux/cpu_input_boost.h>
 
 #define FPC_TTW_HOLD_TIME 2000
 #define FP_UNLOCK_REJECTION_TIMEOUT  (FPC_TTW_HOLD_TIME - 500)
@@ -597,9 +596,6 @@ static irqreturn_t fpc1020_irq_handler(int irq, void *handle)
 		schedule_work(&fpc1020->work);
 	}
 
-	if (state_suspended) {
-		cpu_input_boost_kick_max(CONFIG_WAKE_BOOST_DURATION_MS);
-	}
 
 	return IRQ_HANDLED;
 }
