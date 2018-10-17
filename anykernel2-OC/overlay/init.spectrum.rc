@@ -46,13 +46,13 @@ on property:persist.spectrum.profile=0 && property:init.svc.qcom-post-boot=stopp
     # CPU
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 373028
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2415000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2457600
     write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 90
     write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 20000 1036800:60000
     write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 20000
     write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1036800
     write /sys/devices/system/cpu/cpufreq/interactive/timer_slack 80000
-    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "98 373028:51 652800:56 1036800:66 1401600:74 1689600:82 1843200:84 1958400:87 2016000:84 2150400:84 2304000:84 2415000:99"
+    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "98 373028:51 652800:56 1036800:66 1401600:74 1689600:82 1843200:84 1958400:87 2016000:84 2150400:84 2304000:84 2457600:99"
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 45000
     write /sys/devices/system/cpu/cpufreq/interactive/boost 0
     write /sys/devices/system/cpu/cpufreq/interactive/align_windows 0
@@ -110,7 +110,7 @@ on property:persist.spectrum.profile=1 && property:init.svc.qcom-post-boot=stopp
     write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 40000
     write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1401600
     write /sys/devices/system/cpu/cpufreq/interactive/timer_slack 480000
-    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "98 1036800:66 1401600:74 1689600:82 1843200:84 1958400:87 2016000:84 2150400:84 2304000:84 2415000:84 2611200:85 2764800:99"
+    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "98 1036800:66 1401600:74 1689600:82 1843200:84 1958400:87 2016000:84 2150400:84 2304000:84 2457600:84 2611200:85 2764800:99"
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 50000
     write /sys/devices/system/cpu/cpufreq/interactive/boost 0
     write /sys/devices/system/cpu/cpufreq/interactive/align_windows 0
@@ -219,8 +219,8 @@ on property:persist.spectrum.profile=3 && property:init.svc.qcom-post-boot=stopp
 
     # CPU
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor performance
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 3087000
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 3087000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 3072000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 3072000
 
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
