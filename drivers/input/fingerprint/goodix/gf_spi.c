@@ -47,7 +47,6 @@
 #include <linux/wakelock.h>
 #include <linux/mdss_io_util.h>
 #include <linux/state_notifier.h>
-#include <linux/cpu_input_boost.h>
 #include "gf_spi.h"
 
 #if defined(USE_SPI_BUS)
@@ -568,9 +567,6 @@ static irqreturn_t gf_irq(int irq, void *handle)
 		gf_dev->wait_finger_down = false;
 		schedule_work(&gf_dev->work);
 
-		if (state_suspended) {
-			cpu_input_boost_kick_max(CONFIG_WAKE_BOOST_DURATION_MS);
-		}
 	}
 #elif defined (GF_FASYNC)
 	struct gf_dev *gf_dev = &gf;
