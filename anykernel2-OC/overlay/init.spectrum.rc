@@ -52,7 +52,7 @@ on property:persist.spectrum.profile=0 && property:init.svc.qcom-post-boot=stopp
     write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 20000
     write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1036800
     write /sys/devices/system/cpu/cpufreq/interactive/timer_slack 80000
-    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "98 373028:51 652800:56 1036800:66 1401600:74 1689600:82 1843200:84 1958400:87 2016000:84 2150400:84 2284800:84 2400000:99"
+    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "98 373028:51 652800:56 1036800:66 1401600:74 1689600:82 1843200:84 1958400:87 2016000:84 2150400:84 2284800:85 2400000:99"
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 45000
     write /sys/devices/system/cpu/cpufreq/interactive/boost 0
     write /sys/devices/system/cpu/cpufreq/interactive/align_windows 0
@@ -110,7 +110,7 @@ on property:persist.spectrum.profile=1 && property:init.svc.qcom-post-boot=stopp
     write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 40000
     write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1401600
     write /sys/devices/system/cpu/cpufreq/interactive/timer_slack 480000
-    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "98 1036800:66 1401600:74 1689600:82 1843200:84 1958400:87 2016000:84 2150400:84 2284800:84 2400000:84 2534400:85 2649600:99"
+    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "98 1036800:66 1401600:74 1689600:82 1843200:84 1958400:87 2016000:84 2150400:84 2284800:85 2400000:85 2534400:86 2649600:99"
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 50000
     write /sys/devices/system/cpu/cpufreq/interactive/boost 0
     write /sys/devices/system/cpu/cpufreq/interactive/align_windows 0
