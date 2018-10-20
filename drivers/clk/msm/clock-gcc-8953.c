@@ -738,7 +738,7 @@ static struct clk_freq_tbl ftbl_blsp_spi_apps_clk_src[] = {
 	F(  16000000,           gpll0,   10,    1,     5),
 	F(  19200000,              xo,    1,    0,     0),
 	F(  25000000,           gpll0,   16,    1,     2),
-	F(  80000000,           gpll0,   16,    0,     0),
+	F(  50000000,           gpll0,   16,    0,     0),
 	F_END
 };
 
@@ -1574,7 +1574,7 @@ static struct rcg_clk pdm2_clk_src = {
 
 static struct clk_freq_tbl ftbl_rbcpr_gfx_clk_src[] = {
 	F(  19200000,             xo,    1,    0,     0),
-	F(  80000000,          gpll0,   16,    0,     0),
+	F(  50000000,          gpll0,   16,    0,     0),
 	F_END
 };
 
@@ -1587,7 +1587,7 @@ static struct rcg_clk rbcpr_gfx_clk_src = {
 	.c = {
 		.dbg_name = "rbcpr_gfx_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 19200000, SVS, 80000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 19200000, SVS, 50000000),
 		CLK_INIT(rbcpr_gfx_clk_src.c),
 	},
 };
