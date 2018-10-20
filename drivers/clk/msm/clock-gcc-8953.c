@@ -712,7 +712,7 @@ static struct rcg_clk apc1_droop_detector_clk_src = {
 static struct clk_freq_tbl ftbl_blsp_i2c_apps_clk_src[] = {
 	F(  19200000,              xo,    1,    0,     0),
 	F(  30000000, gpll0_main_div2,   16,    0,     0),
-	F(  70000000,           gpll0,   16,    0,     0),
+	F(  80000000,           gpll0,   16,    0,     0),
 	F_END
 };
 
@@ -725,7 +725,7 @@ static struct rcg_clk blsp1_qup1_i2c_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp1_qup1_i2c_apps_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 70000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 80000000),
 		CLK_INIT(blsp1_qup1_i2c_apps_clk_src.c),
 	},
 };
@@ -738,7 +738,7 @@ static struct clk_freq_tbl ftbl_blsp_spi_apps_clk_src[] = {
 	F(  16000000,           gpll0,   10,    1,     5),
 	F(  19200000,              xo,    1,    0,     0),
 	F(  25000000,           gpll0,   16,    1,     2),
-	F(  50000000,           gpll0,   16,    0,     0),
+	F(  80000000,           gpll0,   16,    0,     0),
 	F_END
 };
 
@@ -752,7 +752,7 @@ static struct rcg_clk blsp1_qup1_spi_apps_clk_src = {
 		.dbg_name = "blsp1_qup1_spi_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
 		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 30000000, NOM,
-				70000000),
+				80000000),
 		CLK_INIT(blsp1_qup1_spi_apps_clk_src.c),
 	},
 };
@@ -766,7 +766,7 @@ static struct rcg_clk blsp1_qup2_i2c_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp1_qup2_i2c_apps_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 70000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 80000000),
 		CLK_INIT(blsp1_qup2_i2c_apps_clk_src.c),
 	},
 };
@@ -781,7 +781,7 @@ static struct rcg_clk blsp1_qup2_spi_apps_clk_src = {
 		.dbg_name = "blsp1_qup2_spi_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
 		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 30000000, NOM,
-				70000000),
+				80000000),
 		CLK_INIT(blsp1_qup2_spi_apps_clk_src.c),
 	},
 };
@@ -795,7 +795,7 @@ static struct rcg_clk blsp1_qup3_i2c_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp1_qup3_i2c_apps_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 70000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 80000000),
 		CLK_INIT(blsp1_qup3_i2c_apps_clk_src.c),
 	},
 };
@@ -810,7 +810,7 @@ static struct rcg_clk blsp1_qup3_spi_apps_clk_src = {
 		.dbg_name = "blsp1_qup3_spi_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
 		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 30000000, NOM,
-				70000000),
+				80000000),
 		CLK_INIT(blsp1_qup3_spi_apps_clk_src.c),
 	},
 };
@@ -824,7 +824,7 @@ static struct rcg_clk blsp1_qup4_i2c_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp1_qup4_i2c_apps_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 70000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 80000000),
 		CLK_INIT(blsp1_qup4_i2c_apps_clk_src.c),
 	},
 };
@@ -839,7 +839,7 @@ static struct rcg_clk blsp1_qup4_spi_apps_clk_src = {
 		.dbg_name = "blsp1_qup4_spi_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
 		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 30000000, NOM,
-				70000000),
+				80000000),
 		CLK_INIT(blsp1_qup4_spi_apps_clk_src.c),
 	},
 };
@@ -903,7 +903,7 @@ static struct rcg_clk blsp2_qup1_i2c_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp2_qup1_i2c_apps_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 70000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 80000000),
 		CLK_INIT(blsp2_qup1_i2c_apps_clk_src.c),
 	},
 };
@@ -918,7 +918,7 @@ static struct rcg_clk blsp2_qup1_spi_apps_clk_src = {
 		.dbg_name = "blsp2_qup1_spi_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
 		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 30000000, NOM,
-				70000000),
+				80000000),
 		CLK_INIT(blsp2_qup1_spi_apps_clk_src.c),
 	},
 };
@@ -932,7 +932,7 @@ static struct rcg_clk blsp2_qup2_i2c_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp2_qup2_i2c_apps_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 70000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 80000000),
 		CLK_INIT(blsp2_qup2_i2c_apps_clk_src.c),
 	},
 };
@@ -947,7 +947,7 @@ static struct rcg_clk blsp2_qup2_spi_apps_clk_src = {
 		.dbg_name = "blsp2_qup2_spi_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
 		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 30000000, NOM,
-				70000000),
+				80000000),
 		CLK_INIT(blsp2_qup2_spi_apps_clk_src.c),
 	},
 };
@@ -961,7 +961,7 @@ static struct rcg_clk blsp2_qup3_i2c_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp2_qup3_i2c_apps_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 70000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 80000000),
 		CLK_INIT(blsp2_qup3_i2c_apps_clk_src.c),
 	},
 };
@@ -976,7 +976,7 @@ static struct rcg_clk blsp2_qup3_spi_apps_clk_src = {
 		.dbg_name = "blsp2_qup3_spi_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
 		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 30000000, NOM,
-				70000000),
+				80000000),
 		CLK_INIT(blsp2_qup3_spi_apps_clk_src.c),
 	},
 };
@@ -990,7 +990,7 @@ static struct rcg_clk blsp2_qup4_i2c_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp2_qup4_i2c_apps_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 70000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 80000000),
 		CLK_INIT(blsp2_qup4_i2c_apps_clk_src.c),
 	},
 };
@@ -1005,7 +1005,7 @@ static struct rcg_clk blsp2_qup4_spi_apps_clk_src = {
 		.dbg_name = "blsp2_qup4_spi_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
 		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 30000000, NOM,
-				70000000),
+				80000000),
 		CLK_INIT(blsp2_qup4_spi_apps_clk_src.c),
 	},
 };
@@ -1574,7 +1574,7 @@ static struct rcg_clk pdm2_clk_src = {
 
 static struct clk_freq_tbl ftbl_rbcpr_gfx_clk_src[] = {
 	F(  19200000,             xo,    1,    0,     0),
-	F(  50000000,          gpll0,   16,    0,     0),
+	F(  80000000,          gpll0,   16,    0,     0),
 	F_END
 };
 
@@ -1587,7 +1587,7 @@ static struct rcg_clk rbcpr_gfx_clk_src = {
 	.c = {
 		.dbg_name = "rbcpr_gfx_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 19200000, SVS, 50000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 19200000, SVS, 80000000),
 		CLK_INIT(rbcpr_gfx_clk_src.c),
 	},
 };
