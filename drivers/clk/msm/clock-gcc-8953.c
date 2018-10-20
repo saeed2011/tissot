@@ -408,7 +408,7 @@ static struct clk_freq_tbl ftbl_gfx3d_clk_src_sdm450[] = {
 	F_MM( 460800000, FIXED_CLK_SRC,       gpll4_out_aux,  2.5,    0,     0),
 	F_MM( 510000000,    1020000000,               gpll3,    1,    0,     0),
 	F_MM( 560000000,    1120000000,               gpll3,    1,    0,     0),
-	F_MM( 650000000,    1240000000,               gpll3,    1,    0,     0),
+	F_MM( 600000000,    1200000000,               gpll3,    1,    0,     0),
 	F_END
 };
 
@@ -682,7 +682,7 @@ static struct rcg_clk apc0_droop_detector_clk_src = {
 		.dbg_name = "apc0_droop_detector_clk_src",
 		.ops = &clk_ops_rcg,
 		VDD_DIG_FMAX_MAP3(LOW_SVS, 19200000, SVS, 400000000, NOM,
-				650000000),
+				600000000),
 		CLK_INIT(apc0_droop_detector_clk_src.c),
 	},
 };
@@ -704,15 +704,15 @@ static struct rcg_clk apc1_droop_detector_clk_src = {
 		.dbg_name = "apc1_droop_detector_clk_src",
 		.ops = &clk_ops_rcg,
 		VDD_DIG_FMAX_MAP3(LOW_SVS, 19200000, SVS, 400000000, NOM,
-				650000000),
+				600000000),
 		CLK_INIT(apc1_droop_detector_clk_src.c),
 	},
 };
 
 static struct clk_freq_tbl ftbl_blsp_i2c_apps_clk_src[] = {
 	F(  19200000,              xo,    1,    0,     0),
-	F(  30000000, gpll0_main_div2,   16,    0,     0),
-	F(  65000000,           gpll0,   16,    0,     0),
+	F(  25000000, gpll0_main_div2,   16,    0,     0),
+	F(  60000000,           gpll0,   16,    0,     0),
 	F_END
 };
 
@@ -725,7 +725,7 @@ static struct rcg_clk blsp1_qup1_i2c_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp1_qup1_i2c_apps_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 65000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 25000000, SVS, 60000000),
 		CLK_INIT(blsp1_qup1_i2c_apps_clk_src.c),
 	},
 };
@@ -737,7 +737,7 @@ static struct clk_freq_tbl ftbl_blsp_spi_apps_clk_src[] = {
 	F(  12500000, gpll0_main_div2,   16,    1,     2),
 	F(  16000000,           gpll0,   10,    1,     5),
 	F(  19200000,              xo,    1,    0,     0),
-	F(  30000000,           gpll0,   16,    1,     2),
+	F(  25000000,           gpll0,   16,    1,     2),
 	F(  50000000,           gpll0,   16,    0,     0),
 	F_END
 };
@@ -751,8 +751,8 @@ static struct rcg_clk blsp1_qup1_spi_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp1_qup1_spi_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
-		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 30000000, NOM,
-				65000000),
+		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 25000000, NOM,
+				60000000),
 		CLK_INIT(blsp1_qup1_spi_apps_clk_src.c),
 	},
 };
@@ -766,7 +766,7 @@ static struct rcg_clk blsp1_qup2_i2c_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp1_qup2_i2c_apps_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 65000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 25000000, SVS, 60000000),
 		CLK_INIT(blsp1_qup2_i2c_apps_clk_src.c),
 	},
 };
@@ -780,8 +780,8 @@ static struct rcg_clk blsp1_qup2_spi_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp1_qup2_spi_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
-		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 30000000, NOM,
-				65000000),
+		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 25000000, NOM,
+				60000000),
 		CLK_INIT(blsp1_qup2_spi_apps_clk_src.c),
 	},
 };
@@ -795,7 +795,7 @@ static struct rcg_clk blsp1_qup3_i2c_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp1_qup3_i2c_apps_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 65000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 25000000, SVS, 60000000),
 		CLK_INIT(blsp1_qup3_i2c_apps_clk_src.c),
 	},
 };
@@ -809,8 +809,8 @@ static struct rcg_clk blsp1_qup3_spi_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp1_qup3_spi_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
-		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 30000000, NOM,
-				65000000),
+		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 25000000, NOM,
+				60000000),
 		CLK_INIT(blsp1_qup3_spi_apps_clk_src.c),
 	},
 };
@@ -824,7 +824,7 @@ static struct rcg_clk blsp1_qup4_i2c_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp1_qup4_i2c_apps_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 65000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 25000000, SVS, 60000000),
 		CLK_INIT(blsp1_qup4_i2c_apps_clk_src.c),
 	},
 };
@@ -838,8 +838,8 @@ static struct rcg_clk blsp1_qup4_spi_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp1_qup4_spi_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
-		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 30000000, NOM,
-				65000000),
+		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 25000000, NOM,
+				60000000),
 		CLK_INIT(blsp1_qup4_spi_apps_clk_src.c),
 	},
 };
@@ -851,7 +851,7 @@ static struct clk_freq_tbl ftbl_blsp_uart_apps_clk_src[] = {
 	F(  16000000, gpll0_main_div2,    5,    1,     5),
 	F(  19200000,              xo,    1,    0,     0),
 	F(  24000000,           gpll0,    1,    3,   100),
-	F(  30000000,           gpll0,   16,    1,     2),
+	F(  25000000,           gpll0,   16,    1,     2),
 	F(  32000000,           gpll0,    1,    1,    25),
 	F(  40000000,           gpll0,    1,    1,    20),
 	F(  46400000,           gpll0,    1,   29,   500),
@@ -859,8 +859,8 @@ static struct clk_freq_tbl ftbl_blsp_uart_apps_clk_src[] = {
 	F(  51200000,           gpll0,    1,    8,   125),
 	F(  56000000,           gpll0,    1,    7,   100),
 	F(  58982400,           gpll0,    1, 1152, 15625),
-	F(  65000000,           gpll0,    1,    3,    40),
-	F(  70000000,           gpll0,    1,    2,    25),
+	F(  60000000,           gpll0,    1,    3,    40),
+	F(  64000000,           gpll0,    1,    2,    25),
 	F_END
 };
 
@@ -874,7 +874,7 @@ static struct rcg_clk blsp1_uart1_apps_clk_src = {
 		.dbg_name = "blsp1_uart1_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
 		VDD_DIG_FMAX_MAP3(LOW_SVS, 16000000, SVS, 32000000, NOM,
-				70000000),
+				64000000),
 		CLK_INIT(blsp1_uart1_apps_clk_src.c),
 	},
 };
@@ -889,7 +889,7 @@ static struct rcg_clk blsp1_uart2_apps_clk_src = {
 		.dbg_name = "blsp1_uart2_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
 		VDD_DIG_FMAX_MAP3(LOW_SVS, 16000000, SVS, 32000000, NOM,
-				70000000),
+				64000000),
 		CLK_INIT(blsp1_uart2_apps_clk_src.c),
 	},
 };
@@ -903,7 +903,7 @@ static struct rcg_clk blsp2_qup1_i2c_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp2_qup1_i2c_apps_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 65000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 25000000, SVS, 60000000),
 		CLK_INIT(blsp2_qup1_i2c_apps_clk_src.c),
 	},
 };
@@ -917,8 +917,8 @@ static struct rcg_clk blsp2_qup1_spi_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp2_qup1_spi_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
-		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 30000000, NOM,
-				65000000),
+		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 25000000, NOM,
+				60000000),
 		CLK_INIT(blsp2_qup1_spi_apps_clk_src.c),
 	},
 };
@@ -932,7 +932,7 @@ static struct rcg_clk blsp2_qup2_i2c_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp2_qup2_i2c_apps_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 65000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 25000000, SVS, 60000000),
 		CLK_INIT(blsp2_qup2_i2c_apps_clk_src.c),
 	},
 };
@@ -946,8 +946,8 @@ static struct rcg_clk blsp2_qup2_spi_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp2_qup2_spi_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
-		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 30000000, NOM,
-				65000000),
+		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 25000000, NOM,
+				60000000),
 		CLK_INIT(blsp2_qup2_spi_apps_clk_src.c),
 	},
 };
@@ -961,7 +961,7 @@ static struct rcg_clk blsp2_qup3_i2c_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp2_qup3_i2c_apps_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 65000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 25000000, SVS, 60000000),
 		CLK_INIT(blsp2_qup3_i2c_apps_clk_src.c),
 	},
 };
@@ -975,8 +975,8 @@ static struct rcg_clk blsp2_qup3_spi_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp2_qup3_spi_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
-		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 30000000, NOM,
-				65000000),
+		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 25000000, NOM,
+				60000000),
 		CLK_INIT(blsp2_qup3_spi_apps_clk_src.c),
 	},
 };
@@ -990,7 +990,7 @@ static struct rcg_clk blsp2_qup4_i2c_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp2_qup4_i2c_apps_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 30000000, SVS, 65000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 25000000, SVS, 60000000),
 		CLK_INIT(blsp2_qup4_i2c_apps_clk_src.c),
 	},
 };
@@ -1004,8 +1004,8 @@ static struct rcg_clk blsp2_qup4_spi_apps_clk_src = {
 	.c = {
 		.dbg_name = "blsp2_qup4_spi_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
-		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 30000000, NOM,
-				65000000),
+		VDD_DIG_FMAX_MAP3(LOW_SVS, 12500000, SVS, 25000000, NOM,
+				60000000),
 		CLK_INIT(blsp2_qup4_spi_apps_clk_src.c),
 	},
 };
@@ -1020,7 +1020,7 @@ static struct rcg_clk blsp2_uart1_apps_clk_src = {
 		.dbg_name = "blsp2_uart1_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
 		VDD_DIG_FMAX_MAP3(LOW_SVS, 16000000, SVS, 32000000, NOM,
-				70000000),
+				64000000),
 		CLK_INIT(blsp2_uart1_apps_clk_src.c),
 	},
 };
@@ -1035,7 +1035,7 @@ static struct rcg_clk blsp2_uart2_apps_clk_src = {
 		.dbg_name = "blsp2_uart2_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
 		VDD_DIG_FMAX_MAP3(LOW_SVS, 16000000, SVS, 32000000, NOM,
-				70000000),
+				64000000),
 		CLK_INIT(blsp2_uart2_apps_clk_src.c),
 	},
 };
@@ -1554,7 +1554,7 @@ static struct rcg_clk vsync_clk_src = {
 
 static struct clk_freq_tbl ftbl_pdm2_clk_src[] = {
 	F(  32000000, gpll0_main_div2, 12.5,    0,     0),
-	F(  70000000,           gpll0, 12.5,    0,     0),
+	F(  64000000,           gpll0, 12.5,    0,     0),
 	F_END
 };
 
@@ -1567,7 +1567,7 @@ static struct rcg_clk pdm2_clk_src = {
 	.c = {
 		.dbg_name = "pdm2_clk_src",
 		.ops = &clk_ops_rcg,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 32000000, SVS, 70000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 32000000, SVS, 64000000),
 		CLK_INIT(pdm2_clk_src.c),
 	},
 };
@@ -1596,7 +1596,7 @@ static struct clk_freq_tbl ftbl_sdcc1_apps_clk_src[] = {
 	F(    144000,              xo,   16,    3,    25),
 	F(    400000,              xo,   12,    1,     4),
 	F(  20000000, gpll0_main_div2,    5,    1,     4),
-	F(  30000000, gpll0_main_div2,   16,    0,     0),
+	F(  25000000, gpll0_main_div2,   16,    0,     0),
 	F(  50000000,           gpll0,   16,    0,     0),
 	F( 100000000,           gpll0,    8,    0,     0),
 	F( 177770000,           gpll0,  4.5,    0,     0),
@@ -1614,7 +1614,7 @@ static struct rcg_clk sdcc1_apps_clk_src = {
 	.c = {
 		.dbg_name = "sdcc1_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
-		VDD_DIG_FMAX_MAP3(LOW_SVS, 30000000, SVS, 100000000, NOM,
+		VDD_DIG_FMAX_MAP3(LOW_SVS, 25000000, SVS, 100000000, NOM,
 				400000000),
 		CLK_INIT(sdcc1_apps_clk_src.c),
 	},
@@ -1646,7 +1646,7 @@ static struct clk_freq_tbl ftbl_sdcc2_apps_clk_src[] = {
 	F(    144000,              xo,   16,    3,    25),
 	F(    400000,              xo,   12,    1,     4),
 	F(  20000000, gpll0_main_div2,    5,    1,     4),
-	F(  30000000, gpll0_main_div2,   16,    0,     0),
+	F(  25000000, gpll0_main_div2,   16,    0,     0),
 	F(  50000000,           gpll0,   16,    0,     0),
 	F( 100000000,           gpll0,    8,    0,     0),
 	F( 177770000,           gpll0,  4.5,    0,     0),
@@ -1664,7 +1664,7 @@ static struct rcg_clk sdcc2_apps_clk_src = {
 	.c = {
 		.dbg_name = "sdcc2_apps_clk_src",
 		.ops = &clk_ops_rcg_mnd,
-		VDD_DIG_FMAX_MAP3(LOW_SVS, 30000000, SVS, 100000000, NOM,
+		VDD_DIG_FMAX_MAP3(LOW_SVS, 25000000, SVS, 100000000, NOM,
 				200000000),
 		CLK_INIT(sdcc2_apps_clk_src.c),
 	},
@@ -1672,7 +1672,7 @@ static struct rcg_clk sdcc2_apps_clk_src = {
 
 static struct clk_freq_tbl ftbl_usb30_mock_utmi_clk_src[] = {
 	F(  19200000,                       xo,    1,    0,     0),
-	F(  65000000,     gpll6_main_div2_mock,    9,    1,     1),
+	F(  60000000,     gpll6_main_div2_mock,    9,    1,     1),
 	F_END
 };
 
@@ -1685,7 +1685,7 @@ static struct rcg_clk usb30_mock_utmi_clk_src = {
 	.c = {
 		.dbg_name = "usb30_mock_utmi_clk_src",
 		.ops = &clk_ops_rcg_mnd,
-		VDD_DIG_FMAX_MAP2(LOW_SVS, 19200000, SVS, 65000000),
+		VDD_DIG_FMAX_MAP2(LOW_SVS, 19200000, SVS, 60000000),
 		CLK_INIT(usb30_mock_utmi_clk_src.c),
 	},
 };
