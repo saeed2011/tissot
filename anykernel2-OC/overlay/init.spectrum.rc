@@ -44,21 +44,9 @@ on property:sys.boot_completed=1
 on property:persist.spectrum.profile=0 && property:init.svc.qcom-post-boot=stopped
 
     # CPU
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 373028
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor intelliactive
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 652800
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2400000
-    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 90
-    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 20000 1036800:60000
-    write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 20000
-    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1036800
-    write /sys/devices/system/cpu/cpufreq/interactive/timer_slack 80000
-    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "98 373028:51 652800:56 1036800:66 1401600:74 1689600:82 1843200:84 1958400:87 2016000:84 2150400:84 2284800:84 2400000:99"
-    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 45000
-    write /sys/devices/system/cpu/cpufreq/interactive/boost 0
-    write /sys/devices/system/cpu/cpufreq/interactive/align_windows 0
-    write /sys/devices/system/cpu/cpufreq/interactive/max_freq_hysteresis 0
-    write /sys/devices/system/cpu/cpufreq/interactive/enable_prediction 0
-    write /sys/devices/system/cpu/cpufreq/interactive/fast_ramp_down 0
 
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
@@ -77,9 +65,9 @@ on property:persist.spectrum.profile=0 && property:init.svc.qcom-post-boot=stopp
     write /sys/module/adreno_idler/parameters/adreno_idler_active Y
 
     # Storage
-    write /sys/block/mmcblk0/queue/scheduler anxiety
+    write /sys/block/mmcblk0/queue/scheduler cfq
     write /sys/block/mmcblk0/queue/read_ahead_kb 512
-    write /sys/block/mmcblk1/queue/scheduler anxiety
+    write /sys/block/mmcblk1/queue/scheduler cfq
     write /sys/block/mmcblk1/queue/read_ahead_kb 512
 
     # Misc
@@ -102,21 +90,9 @@ on property:persist.spectrum.profile=0 && property:init.svc.qcom-post-boot=stopp
 on property:persist.spectrum.profile=1 && property:init.svc.qcom-post-boot=stopped
 
     # CPU
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor intelliactive
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 1036800
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2649600
-    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 80
-    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay 20000 1401600:60000
-    write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 40000
-    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1401600
-    write /sys/devices/system/cpu/cpufreq/interactive/timer_slack 480000
-    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "98 1036800:66 1401600:74 1689600:82 1843200:84 1958400:87 2016000:84 2150400:84 2284800:84 2400000:84 2534400:85 2649600:99"
-    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 50000
-    write /sys/devices/system/cpu/cpufreq/interactive/boost 0
-    write /sys/devices/system/cpu/cpufreq/interactive/align_windows 0
-    write /sys/devices/system/cpu/cpufreq/interactive/max_freq_hysteresis 0
-    write /sys/devices/system/cpu/cpufreq/interactive/enable_prediction 0
-    write /sys/devices/system/cpu/cpufreq/interactive/fast_ramp_down 0
 
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
@@ -135,9 +111,9 @@ on property:persist.spectrum.profile=1 && property:init.svc.qcom-post-boot=stopp
     write /sys/module/adreno_idler/parameters/adreno_idler_active N
 
     # Storage
-    write /sys/block/mmcblk0/queue/scheduler cfq
+    write /sys/block/mmcblk0/queue/scheduler deadline
     write /sys/block/mmcblk0/queue/read_ahead_kb 512
-    write /sys/block/mmcblk1/queue/scheduler cfq
+    write /sys/block/mmcblk1/queue/scheduler deadline
     write /sys/block/mmcblk1/queue/read_ahead_kb 512
 
     # Misc
@@ -219,7 +195,6 @@ on property:persist.spectrum.profile=3 && property:init.svc.qcom-post-boot=stopp
 
     # CPU
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor performance
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 2891000
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2891000
 
     write /sys/devices/system/cpu/cpu1/online 1

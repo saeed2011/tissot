@@ -2033,7 +2033,7 @@
 				"scm_bus_clk", "scm_core_clk_src";
 		qcom,proxy-clock-names = "xo", "scm_core_clk", "scm_iface_clk",
 				 "scm_bus_clk", "scm_core_clk_src";
-		qcom,scm_core_clk_src-freq = <80000000>;
+		qcom,scm_core_clk_src-freq = <100000000>;
 
 		qcom,pas-id = <1>;
 		qcom,complete-ramdump;
@@ -2078,7 +2078,7 @@
 					 "bus_clk", "scm_core_clk",
 					 "scm_iface_clk", "scm_bus_clk",
 					 "scm_core_clk_src";
-		qcom,scm_core_clk_src-freq = <80000000>;
+		qcom,scm_core_clk_src-freq = <100000000>;
 
 		qcom,msm-bus,name = "pil-venus";
 		qcom,msm-bus,num-cases = <2>;
@@ -2115,7 +2115,7 @@
 				"scm_bus_clk", "scm_core_clk_src";
 		qcom,proxy-clock-names = "xo", "scm_core_clk", "scm_iface_clk",
 				 "scm_bus_clk", "scm_core_clk_src";
-		qcom,scm_core_clk_src = <80000000>;
+		qcom,scm_core_clk_src = <100000000>;
 
 		qcom,pas-id = <6>;
 		qcom,proxy-timeout-ms = <10000>;
