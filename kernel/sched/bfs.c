@@ -3324,10 +3324,13 @@ static inline void set_rq_task(struct rq *rq, struct task_struct *p)
 #ifdef CONFIG_SMT_NICE
 	rq->rq_smt_bias = p->smt_bias;
 #endif
-	rq->rq_running = (p != rq->idle);
+	if (p != rq->idle)
+		rq->rq_running = true;
+	else
+		rq->rq_running = false;
 }
 
-static inline void reset_rq_task(struct rq *rq, struct task_struct *p)
+static void reset_rq_task(struct rq *rq, struct task_struct *p)
 {
 	rq->rq_policy = p->policy;
 	rq->rq_prio = p->prio;
