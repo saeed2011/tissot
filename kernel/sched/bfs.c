@@ -224,11 +224,7 @@ static struct root_domain def_root_domain;
 #endif /* CONFIG_SMP */
 
 /* There can be only one */
-#ifdef CONFIG_SMP
-static struct global_rq grq ____cacheline_aligned_in_smp;
-#else
-static struct global_rq grq ____cacheline_aligned;
-#endif
+static struct global_rq grq;
 
 static DEFINE_MUTEX(sched_hotcpu_mutex);
 
