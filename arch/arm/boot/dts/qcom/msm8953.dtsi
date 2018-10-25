@@ -1024,7 +1024,8 @@
 					< 2534400000  12 >,
 					< 2649600000  13 >,
 					< 2784000000  14 >,
-					< 2891000000  15 >;
+					< 2884000000  15 >,
+					< 2991000000  16 >;
 		qcom,speed0-bin-v0-cci = <0 0>,
 					<  148400000  1  >,
 					<  166140000  2  >,
@@ -1040,6 +1041,7 @@
 					<  735500000  12 >,
 					<  780160000  13 >,
 					<  824820000  14 >,
+					<  834820000  14 >,
 					<  849410000  15 >;
 		#clock-cells = <1>;
 	};
@@ -1052,7 +1054,11 @@
 				"cpu3_clk", "cpu4_clk", "cpu5_clk", "cpu6_clk", 
 				"cpu7_clk", "cpu8_clk", "cpu9_clk", "cpu10_clk", 
 				"cpu11_clk", "cpu12_clk", "cpu13_clk", "cpu14_clk";
+				"cpu15_clk", "cpu16_clk";
 		clocks = <&clock_cpu clk_cci_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
+			 <&clock_cpu clk_a53_pwr_clk>,
 			 <&clock_cpu clk_a53_pwr_clk>,
 			 <&clock_cpu clk_a53_pwr_clk>,
 			 <&clock_cpu clk_a53_pwr_clk>,
@@ -1082,7 +1088,8 @@
 					< 2534400 >,
 					< 2649600 >,
 					< 2784000 >,
-					< 2891000 >;
+					< 2884000 >;
+					< 2991000 >;
 	};
 
 	cpubw: qcom,cpubw {
@@ -1148,14 +1155,15 @@
 					< 2534400  9887 >,
 					< 2649600  11863>,
 					< 2784000  11863>,
-					< 2891000  13763>;
+					< 2884000  13763>;
+					< 2991000  13763>;
 		};
 
 		mincpubw-cpufreq {
 			target-dev = <&mincpubw>;
 			cpu-to-dev-map = 
 					 <373028  1525>,
-					 <2891000 5126>;
+					 <2991000 5126>;
 		};
 	};
 
