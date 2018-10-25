@@ -353,16 +353,16 @@
 		compatible = "qcom,cpr4-msm8953-apss-regulator";
 		reg = <0xb018000 0x4000>, <0xa4000 0x1000>;
 		reg-names = "cpr_ctrl", "fuse_base";
-		interrupts = <GIC_SPI 16 IRQ_TYPE_EDGE_RISING>;
+		interrupts = <GIC_SPI 15 IRQ_TYPE_EDGE_RISING>;
 		interrupt-names = "cpr";
 
 		qcom,cpr-ctrl-name = "apc";
 
 		qcom,cpr-sensor-time = <1000>;
 		qcom,cpr-loop-time = <5000000>;
-		qcom,cpr-idle-cycles = <16>;
+		qcom,cpr-idle-cycles = <15>;
 		qcom,cpr-step-quot-init-min = <12>;
-		qcom,cpr-step-quot-init-max = <15>;
+		qcom,cpr-step-quot-init-max = <14>;
 		qcom,cpr-count-mode = <0>;		
 		qcom,cpr-count-repeat = <15>;
 		qcom,cpr-down-error-step-limit = <1>;
@@ -391,7 +391,7 @@
 		qcom,cpr-initial-temp-band = <0>;
 
 		/* Turbo (corner 6) ceiling voltage */
-		qcom,cpr-aging-ref-voltage = <990000>;
+		qcom,cpr-aging-ref-voltage = <1200000>;
 
 		thread@0 {
 			qcom,cpr-thread-id = <0>;
@@ -403,18 +403,18 @@
 			apc_vreg: regulator {
 				regulator-name = "apc_corner";
 				regulator-min-microvolt = <1>;
-				regulator-max-microvolt = <16>; 
+				regulator-max-microvolt = <15>; 
 
 				qcom,cpr-fuse-corners = <4>;
 				qcom,cpr-fuse-combos = <64>;
 				qcom,cpr-speed-bins = <8>;
 				qcom,cpr-speed-bin-corners =
-				<16 16 16 16 16 16 16 16>;
+				<15 15 15 15 15 15 15 15>;
 				qcom,cpr-corners =
 
-				<16 16 16 16 16 16 16 16>;
+				<15 15 15 15 15 15 15 15>;
 				qcom,cpr-corner-fmax-map =
-				<1 2 4 16>;
+				<1 2 4 15>;
 
 				qcom,cpr-voltage-ceiling =
 				<640000>, 
