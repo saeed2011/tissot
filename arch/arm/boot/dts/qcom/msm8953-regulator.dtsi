@@ -391,7 +391,7 @@
 		qcom,cpr-initial-temp-band = <0>;
 
 		/* Turbo (corner 6) ceiling voltage */
-		qcom,cpr-aging-ref-voltage = <990000>;
+		qcom,cpr-aging-ref-voltage = <1065000>;
 
 		thread@0 {
 			qcom,cpr-thread-id = <0>;
@@ -418,20 +418,20 @@
 
 				qcom,cpr-voltage-ceiling =
 				<640000>, 
-				<640000>,
+				<650000>,
 				<685000>,
 				<710000>,
 				<735000>,
 				<785000>,
-				<830000>,
-				<850000>,
-				<875000>,
+				<836000>,
+				<854000>,
+				<872000>,
 				<890000>,
-				<905000>,
-				<920000>,
-				<930000>,
-				<945000>,
-				<955000>;
+				<908000>,
+				<926000>,
+				<944000>,
+				<962000>,
+				<1065000>;
 
 				qcom,cpr-voltage-floor =
 				<500000>,
