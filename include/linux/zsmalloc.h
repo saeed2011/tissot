@@ -3,6 +3,7 @@
  *
  * Copyright (C) 2011  Nitin Gupta
  * Copyright (C) 2012, 2013 Minchan Kim
+ * Copyright (C) 2017 XiaoMi, Inc.
  *
  * This code is released using a dual license strategy: BSD/GPL
  * You can choose the license that better fits your requirements.
@@ -41,18 +42,21 @@ struct zs_pool_stats {
 
 struct zs_pool;
 
-struct zs_pool *zs_create_pool(char *name, gfp_t flags);
+struct zs_pool *zs_create_pool(const char *name);
 void zs_destroy_pool(struct zs_pool *pool);
 
-unsigned long zs_malloc(struct zs_pool *pool, size_t size);
+unsigned long zs_malloc(struct zs_pool *pool, size_t size, gfp_t flags);
 void zs_free(struct zs_pool *pool, unsigned long obj);
+
+size_t zs_huge_class_size(struct zs_pool *pool);
 
 void *zs_map_object(struct zs_pool *pool, unsigned long handle,
 			enum zs_mapmode mm);
 void zs_unmap_object(struct zs_pool *pool, unsigned long handle);
 
 unsigned long zs_get_total_pages(struct zs_pool *pool);
+int zs_get_page_usage(unsigned long *total_pool_pages,
+			unsigned long *total_ori_pages);
 unsigned long zs_compact(struct zs_pool *pool);
-
 void zs_pool_stats(struct zs_pool *pool, struct zs_pool_stats *stats);
 #endif
