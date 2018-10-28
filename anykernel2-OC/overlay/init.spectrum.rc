@@ -40,6 +40,9 @@ on property:sys.boot_completed=1
     write /sys/module/lowmemorykiller/parameters/minfree "18432,23040,27648,32256,36864,46080"
     write /proc/sys/net/ipv4/tcp_congestion_control cubic
 
+    # Hifi_mode
+    write /sys/kernel/hifi_mode/enable_hifi_mode "1"
+
 #* Balance *#(default profile)
 on property:persist.spectrum.profile=0 && property:init.svc.qcom-post-boot=stopped
 
@@ -155,6 +158,7 @@ on property:persist.spectrum.profile=1 && property:init.svc.qcom-post-boot=stopp
 
     # Laptop Mode
     write /proc/sys/vm/laptop_mode "0"
+
 
 #* Battery *#
 on property:persist.spectrum.profile=2 && property:init.svc.qcom-post-boot=stopped
