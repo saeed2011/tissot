@@ -533,7 +533,7 @@
 		qcom,hotplug-temp-hysteresis = <15>;
 		qcom,freq-mitigation-temp = <105>;
 		qcom,freq-mitigation-temp-hysteresis = <15>;
-		qcom,freq-mitigation-value = <1689600>;
+		qcom,freq-mitigation-value = <1728000>;
 		qcom,therm-reset-temp = <115>;
 		qcom,online-hotplug-core;
 		qcom,synchronous-cluster-id = <0 1>;
@@ -585,7 +585,7 @@
 		qcom,ibat-monitor {
 			qcom,low-threshold-uamp = <1200000>;
 			qcom,high-threshold-uamp = <1650000>;
-			qcom,mitigation-freq-khz = <1689600>;
+			qcom,mitigation-freq-khz = <1728000>;
 			qcom,vph-high-threshold-uv = <3700000>;
 			qcom,vph-low-threshold-uv = <3500000>;
 			qcom,soc-low-threshold = <5>;
