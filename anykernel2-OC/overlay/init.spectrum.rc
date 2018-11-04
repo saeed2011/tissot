@@ -153,8 +153,8 @@ on property:persist.spectrum.profile=1 && property:init.svc.qcom-post-boot=stopp
     # I/O Statics
     write /sys/block/mmcblk0/queue/iostats 0
     write /sys/block/mmcblk0rpmb/queue/iostats "0"
-    write /sys/block/mmcblk0/queue/add_random 1
-    write /sys/block/mmcblk1/queue/add_random 1
+    write /sys/block/mmcblk0/queue/add_random 0
+    write /sys/block/mmcblk1/queue/add_random 0
 
     # Laptop Mode
     write /proc/sys/vm/laptop_mode "0"
@@ -259,8 +259,8 @@ on property:persist.spectrum.profile=3 && property:init.svc.qcom-post-boot=stopp
     # I/O Statics
     write /sys/block/mmcblk0/queue/iostats 0
     write /sys/block/mmcblk0rpmb/queue/iostats "0"
-    write /sys/block/mmcblk0/queue/add_random 1
-    write /sys/block/mmcblk1/queue/add_random 1
+    write /sys/block/mmcblk0/queue/add_random 0
+    write /sys/block/mmcblk1/queue/add_random 0
 
     # Laptop Mode
     write /proc/sys/vm/laptop_mode "0"
