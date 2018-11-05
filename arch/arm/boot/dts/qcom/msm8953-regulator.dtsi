@@ -431,7 +431,7 @@
 				<920000>,
 				<930000>,
 				<945000>,
-				<955000>;
+				<990000>;
 
 				qcom,cpr-voltage-floor =
 				<620000>, 
@@ -448,7 +448,7 @@
 				<900000>,
 				<910000>,
 				<925000>,
-				<935000>;
+				<955000>;
 
 				qcom,cpr-floor-to-ceiling-max-range =
 				/* Global speed bin; CPR rev 0..7 */
