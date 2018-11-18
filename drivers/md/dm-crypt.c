@@ -1854,7 +1854,7 @@ static int crypt_ctr(struct dm_target *ti, unsigned int argc, char **argv)
 		cc->crypt_queue = alloc_workqueue("kcryptd", WQ_HIGHPRI | WQ_MEM_RECLAIM, 1);
 	else
 		cc->crypt_queue = alloc_workqueue("kcryptd", WQ_HIGHPRI | WQ_MEM_RECLAIM | WQ_UNBOUND,
-						  num_online_cpus() * 2);
+						  num_online_cpus());
 	if (!cc->crypt_queue) {
 		ti->error = "Couldn't create kcryptd queue";
 		goto bad;
@@ -2088,3 +2088,4 @@ module_exit(dm_crypt_exit);
 MODULE_AUTHOR("Jana Saout <jana@saout.de>");
 MODULE_DESCRIPTION(DM_NAME " target for transparent encryption / decryption");
 MODULE_LICENSE("GPL");
+

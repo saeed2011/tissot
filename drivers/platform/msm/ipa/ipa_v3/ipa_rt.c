@@ -1227,7 +1227,7 @@ static int __ipa_add_rt_rule(enum ipa_ip_type ip, const char *name,
 	 */
 	if (!strcmp(tbl->name, IPA_DFLT_RT_TBL_NAME) &&
 	    (tbl->rule_cnt > 0)) {
-		    IPAERR_RL("cannot add rules to default rt table\n");
+		IPAERR_RL("cannot add rules to default rt table\n");
 		goto error;
 	}
 
@@ -1873,7 +1873,6 @@ static int __ipa_mdfy_rt_rule(struct ipa_rt_rule_mdfy *rtrule)
 		IPAERR_RL("Default tbl rule cannot be modified\n");
 		return -EINVAL;
 	}
-
 	/* Adding check to confirm still
 	 * header entry present in header table or not
 	 */
@@ -2144,3 +2143,4 @@ int ipa3_rt_read_tbl_from_hw(u32 tbl_idx,
 
 	return 0;
 }
+
